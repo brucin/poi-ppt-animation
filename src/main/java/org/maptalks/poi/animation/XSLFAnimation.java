@@ -14,11 +14,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * @author Brucin
+ * Created by wangjun on 16/2/18.
  */
 public class XSLFAnimation {
     
     private int elementId = 1;
+
+    public final static String NS = new String("http://schemas.openxmlformats.org/presentationml/2006/main");
     
     public XSLFAnimation() {
         elementId = 1;
@@ -34,17 +36,17 @@ public class XSLFAnimation {
     }
     
     public Element createAnimationXml(Document document, List<XSLFAnimationType> animationTypes) throws ParserConfigurationException, DOMException, XmlException {
-        Element timing = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:timing");
-        Element tnLst = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:tnLst");
-        Element par = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:par");
-        Element cTn = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cTn");
+        Element timing = document.createElementNS(NS,"p:timing");
+        Element tnLst = document.createElementNS(NS,"p:tnLst");
+        Element par = document.createElementNS(NS,"p:par");
+        Element cTn = document.createElementNS(NS,"p:cTn");
         cTn.setAttribute("id", this.getElementIdStr());
         cTn.setAttribute("dur", "indefinite");
         cTn.setAttribute("restart", "never");
         cTn.setAttribute("nodeType", "tmRoot");
-        Element childTnLst = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:childTnLst");
+        Element childTnLst = document.createElementNS(NS,"p:childTnLst");
 
-        Element seq = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:seq");
+        Element seq = document.createElementNS(NS,"p:seq");
         seq.setAttribute("concurrent", "1");
         seq.setAttribute("nextAc", "seek");
         seq.appendChild(this.createAnimationListXml(document, animationTypes));
@@ -60,12 +62,12 @@ public class XSLFAnimation {
     }
     
     private Element createCondLst(Document document, String tagName, String evtStr) {
-        Element condLst = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:"+tagName);
-        Element cond = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cond");
+        Element condLst = document.createElementNS(NS,"p:"+tagName);
+        Element cond = document.createElementNS(NS,"p:cond");
         cond.setAttribute("evt", evtStr);
         cond.setAttribute("delay", "0");
-        Element tgtEl = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:tgtEl");
-        Element sldTgt = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:sldTgt");
+        Element tgtEl = document.createElementNS(NS,"p:tgtEl");
+        Element sldTgt = document.createElementNS(NS,"p:sldTgt");
         tgtEl.appendChild(sldTgt);
         cond.appendChild(tgtEl);
         condLst.appendChild(cond);
@@ -73,11 +75,11 @@ public class XSLFAnimation {
     }
     
     private Element createAnimationListXml(Document document, List<XSLFAnimationType> animationTypes) throws DOMException, XmlException, ParserConfigurationException {
-        Element cTn = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cTn");
+        Element cTn = document.createElementNS(NS,"p:cTn");
         cTn.setAttribute("id", this.getElementIdStr());
         cTn.setAttribute("dur", "indefinite");
         cTn.setAttribute("nodeType", "mainSeq");
-        Element animationList = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:childTnLst");
+        Element animationList = document.createElementNS(NS,"p:childTnLst");
         for (XSLFAnimationType xslfAnimationType : animationTypes) {
             animationList.appendChild(xslfAnimationType.toXml(document, this));
         }

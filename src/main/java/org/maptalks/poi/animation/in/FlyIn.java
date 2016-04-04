@@ -40,12 +40,12 @@ public class FlyIn implements XSLFAnimationType{
     
     public Element toXml(Document document, XSLFAnimation animation) throws XmlException, ParserConfigurationException {
         String spid = Integer.toString(this.shape.getShapeId());
-        Element firstElement = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:par");
+        Element firstElement = document.createElementNS(XSLFAnimation.NS,"p:par");
         /**
          * <p:par>
          *  <p:cTn id="3" fill="hold">
          */
-        Element element1 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cTn");
+        Element element1 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         element1.setAttribute("id", animation.getElementIdStr());
         element1.setAttribute("fill", "hold");
         
@@ -56,8 +56,8 @@ public class FlyIn implements XSLFAnimationType{
           </p:stCondLst>
           <p:childTnLst>
          */
-        Element element2 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:stCondLst");
-        Element element3 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cond");
+        Element element2 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
+        Element element3 = document.createElementNS(XSLFAnimation.NS,"p:cond");
         element3.setAttribute("delay", "indefinite");
         element2.appendChild(element3);
         element1.appendChild(element2);
@@ -70,15 +70,15 @@ public class FlyIn implements XSLFAnimationType{
                 </p:stCondLst>
          */
 
-        Element childList1 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:childTnLst");
+        Element childList1 = document.createElementNS(XSLFAnimation.NS,"p:childTnLst");
         
-        Element element4 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:par");
-        Element element5 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cTn");
+        Element element4 = document.createElementNS(XSLFAnimation.NS,"p:par");
+        Element element5 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         element5.setAttribute("id", animation.getElementIdStr());
         element5.setAttribute("fill", "hold");
 
-        Element element6 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:stCondLst");
-        Element element7 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cond");
+        Element element6 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
+        Element element7 = document.createElementNS(XSLFAnimation.NS,"p:cond");
         element7.setAttribute("delay", "0");
         element6.appendChild(element7);
         element5.appendChild(element6);
@@ -95,9 +95,9 @@ public class FlyIn implements XSLFAnimationType{
                   </p:stCondLst>
                   <p:childTnLst>
          */
-        Element childList2 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:childTnLst");
-        Element element21 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:par");
-        Element element22 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cTn");
+        Element childList2 = document.createElementNS(XSLFAnimation.NS,"p:childTnLst");
+        Element element21 = document.createElementNS(XSLFAnimation.NS,"p:par");
+        Element element22 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         element22.setAttribute("id", animation.getElementIdStr());
         element22.setAttribute("presetID", spid);
         element22.setAttribute("presetClass", "entr");
@@ -105,44 +105,44 @@ public class FlyIn implements XSLFAnimationType{
         element22.setAttribute("fill", "hold");
         element22.setAttribute("nodeType", "clickEffect");
         
-        Element element23 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:stCondLst");
-        Element element24 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cond");
+        Element element23 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
+        Element element24 = document.createElementNS(XSLFAnimation.NS,"p:cond");
         element24.setAttribute("delay", "0");
         element23.appendChild(element24);
         element22.appendChild(element23);
         element21.appendChild(element22);
         childList2.appendChild(element21);
         
-        Element childList3 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:childTnLst");
-        Element pSet = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:set");
-        Element pcBhvr = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cBhvr");
-        Element element31 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cTn");
+        Element childList3 = document.createElementNS(XSLFAnimation.NS,"p:childTnLst");
+        Element pSet = document.createElementNS(XSLFAnimation.NS,"p:set");
+        Element pcBhvr = document.createElementNS(XSLFAnimation.NS,"p:cBhvr");
+        Element element31 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         element31.setAttribute("id", animation.getElementIdStr());
         element31.setAttribute("fill", "hold");
         element31.setAttribute("dur", "1");
-        Element element32 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:stCondLst");
-        Element element33 = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cond");
+        Element element32 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
+        Element element33 = document.createElementNS(XSLFAnimation.NS,"p:cond");
         element33.setAttribute("delay", "0");
         element32.appendChild(element33);
         element31.appendChild(element32);
         pcBhvr.appendChild(element31);
         
 
-        Element pTgtEl = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:tgtEl");
-        Element pSpTgt = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:spTgt");
+        Element pTgtEl = document.createElementNS(XSLFAnimation.NS,"p:tgtEl");
+        Element pSpTgt = document.createElementNS(XSLFAnimation.NS,"p:spTgt");
         pSpTgt.setAttribute("spid", spid);//shapeId
         pTgtEl.appendChild(pSpTgt);
         pcBhvr.appendChild(pTgtEl);
         
-        Element attrNameLst = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:attrNameLst");
-        Element attrName = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:attrName");
+        Element attrNameLst = document.createElementNS(XSLFAnimation.NS,"p:attrNameLst");
+        Element attrName = document.createElementNS(XSLFAnimation.NS,"p:attrName");
         Text text = document.createTextNode("style.visibility");
         attrName.appendChild(text);
         attrNameLst.appendChild(attrName);
         pcBhvr.appendChild(attrNameLst);
         
-        Element pTo = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:to");
-        Element pStrVal = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:strVal");
+        Element pTo = document.createElementNS(XSLFAnimation.NS,"p:to");
+        Element pStrVal = document.createElementNS(XSLFAnimation.NS,"p:strVal");
         pStrVal.setAttribute("val", "visible");
         pTo.appendChild(pStrVal);
         pSet.appendChild(pcBhvr);
@@ -159,33 +159,33 @@ public class FlyIn implements XSLFAnimationType{
     }
     
     public Element createAnimationXml(XSLFAnimation animation,Document document, String spid, String locTag) {
-        Element panim = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:anim");
+        Element panim = document.createElementNS(XSLFAnimation.NS,"p:anim");
         panim.setAttribute("calcmode", "lin");
         panim.setAttribute("valueType", "num");
         
-        Element pcBhvr = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cBhvr");
+        Element pcBhvr = document.createElementNS(XSLFAnimation.NS,"p:cBhvr");
         pcBhvr.setAttribute("additive", "base");
-        Element pcTn = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:cTn");
+        Element pcTn = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         pcTn.setAttribute("id", animation.getElementIdStr());
         pcTn.setAttribute("dur", "500");
         pcTn.setAttribute("fill", "hold");
         pcBhvr.appendChild(pcTn);
         
-        Element pTgtEl = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:tgtEl");
-        Element pSpTgt = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:spTgt");
+        Element pTgtEl = document.createElementNS(XSLFAnimation.NS,"p:tgtEl");
+        Element pSpTgt = document.createElementNS(XSLFAnimation.NS,"p:spTgt");
         pSpTgt.setAttribute("spid", spid);//shapeId
         pTgtEl.appendChild(pSpTgt);
         pcBhvr.appendChild(pTgtEl);
         
-        Element attrNameLst = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:attrNameLst");
-        Element attrName = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:attrName");
+        Element attrNameLst = document.createElementNS(XSLFAnimation.NS,"p:attrNameLst");
+        Element attrName = document.createElementNS(XSLFAnimation.NS,"p:attrName");
         Text text = document.createTextNode(locTag);
         attrName.appendChild(text);
         attrNameLst.appendChild(attrName);
         pcBhvr.appendChild(attrNameLst);
         panim.appendChild(pcBhvr);
         
-        Element ptavLst = document.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:tavLst");
+        Element ptavLst = document.createElementNS(XSLFAnimation.NS,"p:tavLst");
         String startLoc = this.getStartLocation(locTag);
         String endLoc = this.getEndLocation(locTag);
         ptavLst.appendChild(createShapeLocation(document, "0", startLoc));
@@ -246,10 +246,10 @@ public class FlyIn implements XSLFAnimationType{
      * @return
      */
     public Element createShapeLocation(Document doc, String tm, String location) {
-        Element ptav = doc.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:tav");
+        Element ptav = doc.createElementNS(XSLFAnimation.NS,"p:tav");
         ptav.setAttribute("tm", tm);
-        Element pval = doc.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:val");
-        Element pstrVal = doc.createElementNS("http://schemas.openxmlformats.org/presentationml/2006/main","p:strVal");
+        Element pval = doc.createElementNS(XSLFAnimation.NS,"p:val");
+        Element pstrVal = doc.createElementNS(XSLFAnimation.NS,"p:strVal");
         pstrVal.setAttribute("val", location);
         pval.appendChild(pstrVal);
         ptav.appendChild(pval);

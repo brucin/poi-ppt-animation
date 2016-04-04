@@ -32,9 +32,10 @@ import org.apache.poi.xslf.usermodel.XSLFPictureShape;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.junit.Test;
 import org.maptalks.poi.animation.in.FlyIn;
+import org.maptalks.poi.animation.out.FlyOut;
 
 /**
- * @author Brucin
+ * Created by wangjun on 16/2/18.
  */
 public class TestXSLFAnimationShape {
     
@@ -71,6 +72,10 @@ public class TestXSLFAnimationShape {
             picShape.setLineWidth(0);
             XSLFAnimationType animationType = new FlyIn(picShape, directions[i]);
             animationTypes.add(animationType);
+
+            XSLFAnimationType animationOutType = new FlyOut(picShape, directions[i]);
+
+            animationTypes.add(animationOutType);
         }
         slide = animation.addAnimationToSlide(slide, animationTypes); 
         FileOutputStream out = new FileOutputStream(pathStr+"/temp.pptx");

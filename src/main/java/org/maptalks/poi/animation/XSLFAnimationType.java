@@ -7,7 +7,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * @author Brucin
+ * Created by wangjun on 16/2/18.
  */
 public interface XSLFAnimationType {
     
