@@ -27,13 +27,13 @@ import org.w3c.dom.Text;
 /**
  * Created by wangjun on 16/2/18.
  */
-public class FlyInAnimation implements XSLFAnimationType{
+public class FlyIn implements XSLFAnimationType{
     
     private XSLFSimpleShape shape;
     
     private String moveDirection;
 
-    public FlyInAnimation(XSLFSimpleShape shape, String moveDirection) {
+    public FlyIn(XSLFSimpleShape shape, String moveDirection) {
         this.shape = shape;
         this.moveDirection = moveDirection;
     }

@@ -31,7 +31,7 @@ import org.apache.poi.xslf.usermodel.XSLFPictureData;
 import org.apache.poi.xslf.usermodel.XSLFPictureShape;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.junit.Test;
-import org.maptalks.poi.animation.in.FlyInAnimation;
+import org.maptalks.poi.animation.in.FlyIn;
 
 /**
  * @author Brucin
@@ -69,11 +69,11 @@ public class TestXSLFAnimationShape {
             XSLFPictureShape picShape=slide.createPicture(pictureData);
             picShape.setAnchor(rectangle);
             picShape.setLineWidth(0);
-            XSLFAnimationType animationType = new FlyInAnimation(picShape, directions[i]);
+            XSLFAnimationType animationType = new FlyIn(picShape, directions[i]);
             animationTypes.add(animationType);
         }
         slide = animation.addAnimationToSlide(slide, animationTypes); 
-        FileOutputStream out = new FileOutputStream(pathStr+"/nwp.pptx");
+        FileOutputStream out = new FileOutputStream(pathStr+"/temp.pptx");
         pptx.write(out);
         out.close();   
     }
