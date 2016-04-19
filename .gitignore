@@ -102,6 +102,3 @@ buildNumber.properties
 src/main/webapp/upload/
 
 .dist/
-
-src/test/resources/
-

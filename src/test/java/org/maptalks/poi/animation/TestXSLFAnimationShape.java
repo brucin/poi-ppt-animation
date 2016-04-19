@@ -54,7 +54,7 @@ public class TestXSLFAnimationShape {
         directions[3] = MoveDirection.RIGHT;
         directions[4] = MoveDirection.BOTTOM;
         String pathStr = this.getClass().getResource("/images").getPath();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             String fileName = pathStr+"/"+(i+1)+".png";
             File downloadeFile = new File(fileName);
             BufferedInputStream in = new  BufferedInputStream(new FileInputStream(downloadeFile));
