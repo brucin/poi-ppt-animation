@@ -14,40 +14,22 @@ import javax.xml.parsers.ParserConfigurationException;
 /**
  * Created by wangjun on 16/4/4.
  */
-public class FlyOut implements XSLFAnimationType{
-
-    private XSLFSimpleShape shape;
-
-    private String moveDirection;
+public class FlyOut extends XSLFAnimationType{
 
     public FlyOut(XSLFSimpleShape shape, String moveDirection) {
         this.shape = shape;
         this.moveDirection = moveDirection;
+        this.nodeType = "clickEffect";
     }
-    
+
+    public FlyOut(XSLFSimpleShape shape, String moveDirection, String nodeType) {
+        this.shape = shape;
+        this.moveDirection = moveDirection;
+        this.nodeType = nodeType;
+    }
+
     public Element toXml(Document document, XSLFAnimation animation) throws XmlException, ParserConfigurationException {
         String spid = Integer.toString(this.shape.getShapeId());
-        Element firstElement = document.createElementNS(XSLFAnimation.NS,"p:par");
-        /**
-         * <p:par>
-         *  <p:cTn id="3" fill="hold">
-         */
-        Element element1 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
-        element1.setAttribute("id", animation.getElementIdStr());
-        element1.setAttribute("fill", "hold");
-        
-        /**
-         * 
-          <p:stCondLst>
-            <p:cond delay="indefinite"/>
-          </p:stCondLst>
-          <p:childTnLst>
-         */
-        Element element2 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
-        Element element3 = document.createElementNS(XSLFAnimation.NS,"p:cond");
-        element3.setAttribute("delay", "indefinite");
-        element2.appendChild(element3);
-        element1.appendChild(element2);
         /**
          * 
             <p:par>
@@ -56,8 +38,6 @@ public class FlyOut implements XSLFAnimationType{
                   <p:cond delay="0"/>
                 </p:stCondLst>
          */
-
-        Element childList1 = document.createElementNS(XSLFAnimation.NS,"p:childTnLst");
         
         Element element4 = document.createElementNS(XSLFAnimation.NS,"p:par");
         Element element5 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
@@ -70,8 +50,6 @@ public class FlyOut implements XSLFAnimationType{
         element6.appendChild(element7);
         element5.appendChild(element6);
         element4.appendChild(element5);
-        childList1.appendChild(element4);
-        element1.appendChild(childList1);
         
         /**
          * <p:childTnLst>
@@ -90,7 +68,7 @@ public class FlyOut implements XSLFAnimationType{
         element22.setAttribute("presetClass", "exit");
         element22.setAttribute("presetSubtype", "4");
         element22.setAttribute("fill", "hold");
-        element22.setAttribute("nodeType", "clickEffect");
+        element22.setAttribute("nodeType", this.nodeType);
         
         Element element23 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
         Element element24 = document.createElementNS(XSLFAnimation.NS,"p:cond");
@@ -140,9 +118,9 @@ public class FlyOut implements XSLFAnimationType{
         childList3.appendChild(createAnimationXml(animation,document, spid, "ppt_y"));
         element22.appendChild(childList3);
         element5.appendChild(childList2);
-        firstElement.appendChild(element1);
+//        firstElement.appendChild(element1);
 //        root.appendChild(firstElement);
-        return firstElement;
+        return element4;
     }
     
     public Element createAnimationXml(XSLFAnimation animation,Document document, String spid, String locTag) {

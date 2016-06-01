@@ -16,16 +16,6 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import java.awt.Dimension;
-import java.awt.geom.Rectangle2D;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFPictureData;
 import org.apache.poi.xslf.usermodel.XSLFPictureShape;
@@ -34,13 +24,19 @@ import org.junit.Test;
 import org.maptalks.poi.animation.in.FlyIn;
 import org.maptalks.poi.animation.out.FlyOut;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestXSLFAnimationShape {
+public class TestXSLFAnimationGroup {
     
     @Test
-    public void testAnimationSlide() throws Exception {
+    public void testAnimationGroup() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         XSLFSlide slide = pptx.createSlide();
         Dimension pageSize = pptx.getPageSize();
@@ -54,6 +50,7 @@ public class TestXSLFAnimationShape {
         directions[3] = MoveDirection.RIGHT;
         directions[4] = MoveDirection.BOTTOM;
         String pathStr = this.getClass().getResource("/images").getPath();
+        String nodeType = "clickEffect";
         for (int i = 0; i < 3; i++) {
             String fileName = pathStr+"/"+(i+1)+".png";
             File downloadeFile = new File(fileName);
@@ -70,14 +67,18 @@ public class TestXSLFAnimationShape {
             XSLFPictureShape picShape=slide.createPicture(pictureData);
             picShape.setAnchor(rectangle);
             picShape.setLineWidth(0);
-            XSLFAnimationType animationType = new FlyIn(picShape, directions[i]);
-            animationTypes.add(animationType);
 
-            XSLFAnimationType animationOutType = new FlyOut(picShape, directions[i]);
-            animationTypes.add(animationOutType);
+            if(i>1) {
+                nodeType = "afterEffect";
+                XSLFAnimationType animationType = new FlyIn(picShape, directions[i], nodeType);
+                animationTypes.get(1).addChild(animationType);
+            } else {
+                XSLFAnimationType animationType = new FlyIn(picShape, directions[i], nodeType);
+                animationTypes.add(animationType);
+            }
         }
-        slide = animation.addAnimationToSlide(slide, animationTypes); 
-        FileOutputStream out = new FileOutputStream(pathStr+"/temp.pptx");
+        animation.addAnimationToSlide(slide, animationTypes);
+        FileOutputStream out = new FileOutputStream(pathStr+"/group.pptx");
         pptx.write(out);
         out.close();   
     }
