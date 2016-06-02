@@ -89,28 +89,30 @@ public class XSLFAnimation {
 
     private Element createAnimationXml(Document document, XSLFAnimationType xslfAnimationType, Element childrenElement) throws DOMException, XmlException, ParserConfigurationException{
         List<XSLFAnimationType> animations = xslfAnimationType.getChildren();
-        if(animations != null && animations.size()>0) {
-            Element firstElement = document.createElementNS(XSLFAnimation.NS,"p:par");
-            Element element1 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
-            element1.setAttribute("id", this.getElementIdStr());
-            element1.setAttribute("fill", "hold");
 
-            Element element2 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
-            Element element3 = document.createElementNS(XSLFAnimation.NS,"p:cond");
-            element3.setAttribute("delay", "indefinite");
-            element2.appendChild(element3);
-            element1.appendChild(element2);
-            Element childList = document.createElementNS(XSLFAnimation.NS,"p:childTnLst");
+        Element firstElement = document.createElementNS(XSLFAnimation.NS,"p:par");
+        Element element1 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
+        element1.setAttribute("id", this.getElementIdStr());
+        element1.setAttribute("fill", "hold");
+
+        Element element2 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
+        Element element3 = document.createElementNS(XSLFAnimation.NS,"p:cond");
+        element3.setAttribute("delay", "indefinite");
+        element2.appendChild(element3);
+        element1.appendChild(element2);
+        Element childList = document.createElementNS(XSLFAnimation.NS,"p:childTnLst");
+
+        if(animations != null && animations.size()>0) {
             childList.appendChild(xslfAnimationType.toXml(document, this));
             for (XSLFAnimationType animation : animations) {
                 childList.appendChild(animation.toXml(document, this));
             }
-            element1.appendChild(childList);
-            firstElement.appendChild(element1);
-            childrenElement.appendChild(firstElement);
         } else {
-            childrenElement.appendChild(xslfAnimationType.toXml(document, this));
+            childList.appendChild(xslfAnimationType.toXml(document, this));
         }
+        element1.appendChild(childList);
+        firstElement.appendChild(element1);
+        childrenElement.appendChild(firstElement);
         return childrenElement;
     }
     
