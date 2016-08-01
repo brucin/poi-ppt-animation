@@ -87,7 +87,7 @@ public class FlyOut extends XSLFAnimationType{
         element31.setAttribute("dur", "1");
         Element element32 = document.createElementNS(XSLFAnimation.NS,"p:stCondLst");
         Element element33 = document.createElementNS(XSLFAnimation.NS,"p:cond");
-        element33.setAttribute("delay", "0");
+        element33.setAttribute("delay", "500");
         element32.appendChild(element33);
         element31.appendChild(element32);
         pcBhvr.appendChild(element31);
@@ -132,7 +132,7 @@ public class FlyOut extends XSLFAnimationType{
         pcBhvr.setAttribute("additive", "base");
         Element pcTn = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         pcTn.setAttribute("id", animation.getElementIdStr());
-        pcTn.setAttribute("dur", "500");
+        pcTn.setAttribute("dur", "1500");
         pcTn.setAttribute("fill", "hold");
         pcBhvr.appendChild(pcTn);
         
