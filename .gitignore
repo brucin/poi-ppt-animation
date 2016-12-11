@@ -102,3 +102,6 @@ buildNumber.properties
 src/main/webapp/upload/
 
 .dist/
+
+src/test/resources/ppt/old.pptx
+dist/
