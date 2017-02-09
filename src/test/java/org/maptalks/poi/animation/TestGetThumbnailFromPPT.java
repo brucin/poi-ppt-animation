@@ -37,7 +37,7 @@ public class TestGetThumbnailFromPPT {
         String pptFilePath = this.getClass().getResource("/ppt").getPath()+"/old.pptx";
         String outputPath = this.getClass().getResource("/ppt").getPath()+"/slides/";
 
-        ArrayList<String> picUrlList = SeegooPoiTool.getThumbnailFromPPT(pptFilePath, outputPath, null, 0, 0);
+        ArrayList<String> picUrlList = SeegooPoiTool.getThumbnailFromPPT(pptFilePath, outputPath, 0, 0);
         for (int i = 0; i < picUrlList.size(); i++) {
             System.out.println(picUrlList.get(i));
         }

@@ -22,7 +22,7 @@ public class SeegooPoiTool {
         int[] removeIds = config.getRemoveIds();
         if(removeIds != null) {
             for (int i = 0; i < removeIds.length; i++) {
-                xmlSlideShow.removeSlide(removeIds[i]);
+                xmlSlideShow.removeSlide(removeIds[i]-i);
             }
         }
         ArrayList<Slide> slides = config.getSlides();
@@ -36,19 +36,14 @@ public class SeegooPoiTool {
         xmlSlideShow.write(out);
     }
 
-    public static ArrayList<String> getThumbnailFromPPT(String pptFilePath, String outputFolder, String saveFolder, int picWidth, int picHeight) throws Exception{
+    public static ArrayList<String> getThumbnailFromPPT(String pptFilePath, String outputFolder, int picWidth, int picHeight) throws Exception{
         ArrayList<String> imageUrlList = new ArrayList<String>();
         XMLSlideShow xmlSlideShow = new XMLSlideShow(new FileInputStream(pptFilePath));
         List<XSLFSlide> slides = xmlSlideShow.getSlides();
-        long createTime = System.currentTimeMillis();
-        if(saveFolder == null || saveFolder.length() == 0) {
-            saveFolder = createTime+"";
-        }
-        File savePath = new File(outputFolder + saveFolder);
+        File savePath = new File(outputFolder);
         if(!savePath.exists()) {
             savePath.mkdirs();
         }
-        String picPath = createTime + File.separator;
         Dimension screenSize = xmlSlideShow.getPageSize();
         if(picWidth == 0) {
             picWidth = screenSize.width;
@@ -63,11 +58,11 @@ public class SeegooPoiTool {
             graphics.setPaint(Color.WHITE);
             graphics.fill(new Rectangle2D.Float(0, 0, picWidth, picHeight));
             slide.draw(graphics);
-            String picName = "slide_"+i+".png";
-            FileOutputStream out = new FileOutputStream(outputFolder + picPath + picName);
+            String picName = i + ".png";
+            FileOutputStream out = new FileOutputStream(outputFolder + picName);
             javax.imageio.ImageIO.write(img, "png", out);
             out.close();
-            imageUrlList.add(picPath+picName);
+            imageUrlList.add(picName);
         }
         return imageUrlList;
     }
