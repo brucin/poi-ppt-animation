@@ -22,7 +22,7 @@ public class SeegooPoiTool {
         int[] removeIds = config.getRemoveIds();
         if(removeIds != null) {
             for (int i = 0; i < removeIds.length; i++) {
-                xmlSlideShow.removeSlide(removeIds[i]-i);
+                xmlSlideShow.removeSlide(removeIds[i]);
             }
         }
         ArrayList<Slide> slides = config.getSlides();
@@ -34,6 +34,9 @@ public class SeegooPoiTool {
         }
         FileOutputStream out = new FileOutputStream(outputPath);
         xmlSlideShow.write(out);
+        out.flush();
+        out.close();
+        xmlSlideShow.close();
     }
 
     public static ArrayList<String> getThumbnailFromPPT(String pptFilePath, String outputFolder, int picWidth, int picHeight) throws Exception{
@@ -61,9 +64,11 @@ public class SeegooPoiTool {
             String picName = i + ".png";
             FileOutputStream out = new FileOutputStream(outputFolder + picName);
             javax.imageio.ImageIO.write(img, "png", out);
+            out.flush();
             out.close();
             imageUrlList.add(picName);
         }
+        xmlSlideShow.close();
         return imageUrlList;
     }
 }

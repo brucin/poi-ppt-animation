@@ -88,8 +88,6 @@ public class XSLFAnimation {
     }
 
     private Element createAnimationXml(Document document, XSLFAnimationType xslfAnimationType, Element childrenElement) throws DOMException, XmlException, ParserConfigurationException{
-        List<XSLFAnimationType> animations = xslfAnimationType.getChildren();
-
         Element firstElement = document.createElementNS(XSLFAnimation.NS,"p:par");
         Element element1 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         element1.setAttribute("id", this.getElementIdStr());
@@ -102,6 +100,7 @@ public class XSLFAnimation {
         element1.appendChild(element2);
         Element childList = document.createElementNS(XSLFAnimation.NS,"p:childTnLst");
 
+        List<XSLFAnimationType> animations = xslfAnimationType.getChildren();
         if(animations != null && animations.size()>0) {
             childList.appendChild(xslfAnimationType.toXml(document, this));
             for (XSLFAnimationType animation : animations) {
