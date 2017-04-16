@@ -56,13 +56,19 @@ public class TestMergePPT {
         String pptFilePath = this.getClass().getResource("/ppt").getPath()+"/old.pptx";
         XMLSlideShow xmlSlideShow = new XMLSlideShow(new FileInputStream(pptFilePath));
         String outputPath = this.getClass().getResource("/ppt").getPath()+"/merge.pptx";
+        XSLFSlideMaster defaultMaster = xmlSlideShow.getSlideMasters().get(0);
+        for(XSLFSlideLayout layout : defaultMaster.getSlideLayouts()){
+            System.out.println(layout.getType());
+            System.out.println(layout.getName());
+            System.out.println("########################");
+        }
 
-        XSLFSlide slide = xmlSlideShow.createSlide();
-        XSLFSlide slide1 = xmlSlideShow.createSlide();
+        XSLFSlide slide = xmlSlideShow.createSlide(defaultMaster.getLayout(SlideLayout.TWO_TX_TWO_OBJ));
+//        XSLFSlide slide1 = xmlSlideShow.createSlide();
         ArrayList<Slide> slides = new ArrayList<Slide>();
         slides.add(new Slide(1, slide));
-        slides.add(new Slide(3, slide1));
-        int[] removeIds = new int[] {0,2,3};
+//        slides.add(new Slide(3, slide1));
+        int[] removeIds = new int[] {1};
         MergeConfig config = new MergeConfig(removeIds, slides);
         SeegooPoiTool.mergeSlidesToPPT(xmlSlideShow, config, outputPath);
     }

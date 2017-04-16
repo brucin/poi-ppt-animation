@@ -20,12 +20,14 @@ public class ZoomIn extends XSLFAnimationType {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = "clickEffect";
+        this.presetSubtype = "16";
     }
 
     public ZoomIn(XSLFSimpleShape shape, String moveDirection, String nodeType) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = nodeType;
+        this.presetSubtype = "16";
     }
 
     public Element toXml(Document document, XSLFAnimation animation) throws XmlException, ParserConfigurationException {
@@ -46,7 +48,7 @@ public class ZoomIn extends XSLFAnimationType {
         /**
          * <p:childTnLst>
               <p:par>
-                <p:cTn id="5" presetID="2" presetClass="entr" presetSubtype="8" fill="hold" nodeType="clickEffect">
+                <p:cTn id="5" presetID="2" presetClass="entr" presetSubtype="16" fill="hold" nodeType="clickEffect">
                   <p:stCondLst>
                     <p:cond delay="0"/>
                   </p:stCondLst>
@@ -56,9 +58,9 @@ public class ZoomIn extends XSLFAnimationType {
         Element element21 = document.createElementNS(XSLFAnimation.NS,"p:par");
         Element element22 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         element22.setAttribute("id", animation.getElementIdStr());
-        element22.setAttribute("presetID", spid);
+        element22.setAttribute("presetID", "53");
         element22.setAttribute("presetClass", "entr");
-        element22.setAttribute("presetSubtype", "16");
+        element22.setAttribute("presetSubtype", this.presetSubtype);
         element22.setAttribute("fill", "hold");
         element22.setAttribute("nodeType", this.nodeType);
         

@@ -20,12 +20,14 @@ public class FlyOut extends XSLFAnimationType{
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = "clickEffect";
+        this.presetSubtype = this.getPresettype(moveDirection);
     }
 
     public FlyOut(XSLFSimpleShape shape, String moveDirection, String nodeType) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = nodeType;
+        this.presetSubtype = this.getPresettype(moveDirection);
     }
 
     public Element toXml(Document document, XSLFAnimation animation) throws XmlException, ParserConfigurationException {
@@ -64,9 +66,9 @@ public class FlyOut extends XSLFAnimationType{
         Element element21 = document.createElementNS(XSLFAnimation.NS,"p:par");
         Element element22 = document.createElementNS(XSLFAnimation.NS,"p:cTn");
         element22.setAttribute("id", animation.getElementIdStr());
-        element22.setAttribute("presetID", spid);
+        element22.setAttribute("presetID", "2");
         element22.setAttribute("presetClass", "exit");
-        element22.setAttribute("presetSubtype", "4");
+        element22.setAttribute("presetSubtype", this.presetSubtype);
         element22.setAttribute("fill", "hold");
         element22.setAttribute("nodeType", this.nodeType);
         
@@ -196,6 +198,20 @@ public class FlyOut extends XSLFAnimationType{
                 result = "1+ppt_h/2";
             }
         } 
+        return result;
+    }
+
+    private String getPresettype(String moveDirection) {
+        String result = new String("");
+        if(moveDirection.equals(MoveDirection.LEFT)) {
+            result = "8";
+        } else if(moveDirection.equals(MoveDirection.RIGHT)) {
+            result = "2";
+        }  else if(moveDirection.equals(MoveDirection.TOP)) {
+            result = "1";
+        }  else if(moveDirection.equals(MoveDirection.BOTTOM)) {
+            result = "4";
+        }
         return result;
     }
     

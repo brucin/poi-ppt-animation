@@ -20,6 +20,8 @@ public class XSLFAnimationType {
 
     protected String nodeType;
 
+    protected String presetSubtype;
+
     private List<XSLFAnimationType> children = new ArrayList<XSLFAnimationType>();
 
     public XSLFAnimationType() {
@@ -50,4 +52,11 @@ public class XSLFAnimationType {
         this.children.add(child);
     }
 
+    public String getPresetSubtype() {
+        return presetSubtype;
+    }
+
+    public void setPresetSubtype(String presetSubtype) {
+        this.presetSubtype = presetSubtype;
+    }
 }

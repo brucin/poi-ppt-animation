@@ -1,7 +1,8 @@
 package org.maptalks.poi.animation.util;
 
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.sl.usermodel.TextRun;
+import org.apache.poi.xslf.usermodel.*;
+import org.apache.poi.xslf.util.PPTX2PNG;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -56,7 +57,18 @@ public class SeegooPoiTool {
         }
         for (int i = 0; i < slides.size(); i++) {
             XSLFSlide slide = slides.get(i);
-            BufferedImage img = new BufferedImage(picWidth, picHeight, BufferedImage.TYPE_INT_RGB);
+//            List<XSLFShape> shapes =  slide.getShapes();
+//            if(shapes != null) {
+//                for (int j = 0; j < shapes.size(); j++) {
+//                    XSLFShape shape = shapes.get(j);
+//                    if (shape instanceof XSLFTextShape) {
+//                        XSLFTextShape textShape = (XSLFTextShape) shape;
+//                    } else if (shape instanceof XSLFTable) {
+//                        System.out.println("HAVE TABLE......");
+//                    }
+//                }
+//            }
+            BufferedImage img = new BufferedImage(picWidth, picHeight, BufferedImage.TYPE_INT_RGB);//TYPE_INT_RGB
             Graphics2D graphics = img.createGraphics();
             graphics.setPaint(Color.WHITE);
             graphics.fill(new Rectangle2D.Float(0, 0, picWidth, picHeight));

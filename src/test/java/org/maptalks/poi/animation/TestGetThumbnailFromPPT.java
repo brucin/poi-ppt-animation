@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class TestGetThumbnailFromPPT {
     
     @Test
-    public void testMerge() throws Exception {
+    public void testGetThumbnail() throws Exception {
         String pptFilePath = this.getClass().getResource("/ppt").getPath()+"/old.pptx";
         String outputPath = this.getClass().getResource("/ppt").getPath()+"/slides/";
 
