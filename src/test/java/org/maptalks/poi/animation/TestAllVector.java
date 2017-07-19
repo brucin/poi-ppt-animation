@@ -36,7 +36,7 @@ public class TestAllVector {
     public void testAllVector() throws Exception {
         XMLSlideShow ppt = new XMLSlideShow();
 
-        String pathStr = this.getClass().getResource("/images").getPath();
+        String pathStr = this.getClass().getResource("/ppt").getPath();
         XSLFSlide blankSlide = ppt.createSlide();
         // blank slide
         // there can be multiple masters each referencing a number of layouts
