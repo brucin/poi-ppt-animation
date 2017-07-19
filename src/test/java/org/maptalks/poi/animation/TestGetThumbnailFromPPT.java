@@ -16,14 +16,9 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.junit.Test;
-import org.maptalks.poi.animation.util.MergeConfig;
-import org.maptalks.poi.animation.util.SeegooPoiTool;
-import org.maptalks.poi.animation.util.Slide;
+import org.maptalks.poi.animation.util.PPTTool;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 
 
@@ -37,7 +32,7 @@ public class TestGetThumbnailFromPPT {
         String pptFilePath = this.getClass().getResource("/ppt").getPath()+"/old.pptx";
         String outputPath = this.getClass().getResource("/ppt").getPath()+"/slides/";
 
-        ArrayList<String> picUrlList = SeegooPoiTool.getThumbnailFromPPT(pptFilePath, outputPath, 0, 0);
+        ArrayList<String> picUrlList = PPTTool.getThumbnailFromPPT(pptFilePath, outputPath, 0, 0);
         for (int i = 0; i < picUrlList.size(); i++) {
             System.out.println(picUrlList.get(i));
         }

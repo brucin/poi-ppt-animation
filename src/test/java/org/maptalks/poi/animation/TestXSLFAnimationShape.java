@@ -26,13 +26,11 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xslf.usermodel.XSLFPictureData;
-import org.apache.poi.xslf.usermodel.XSLFPictureShape;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
 import org.maptalks.poi.animation.in.FlyIn;
 import org.maptalks.poi.animation.out.FlyOut;
+import org.maptalks.poi.shape.TextBox;
 
 /**
  * Created by wangjun on 16/2/18.
@@ -76,6 +74,12 @@ public class TestXSLFAnimationShape {
             XSLFAnimationType animationOutType = new FlyOut(picShape, directions[i]);
             animationTypes.add(animationOutType);
         }
+        XSLFTextBox textBox = new TextBox("文本标签", 14, 41, 91, 36)
+                .addTo(slide);
+
+        XSLFAnimationType animationType = new FlyIn(textBox, MoveDirection.RIGHT);
+        animationTypes.add(animationType);
+
         slide = animation.addAnimationToSlide(slide, animationTypes); 
         FileOutputStream out = new FileOutputStream(pathStr+"/temp.pptx");
         pptx.write(out);

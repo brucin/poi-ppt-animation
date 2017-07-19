@@ -16,34 +16,16 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.hslf.extractor.PowerPointExtractor;
-import org.apache.poi.hslf.usermodel.HSLFSlideShow;
-import org.apache.poi.openxml4j.opc.PackagePart;
-import org.apache.poi.sl.usermodel.SlideShow;
-import org.apache.poi.sl.usermodel.TextRun;
-import org.apache.poi.ss.usermodel.Picture;
-import org.apache.poi.ss.usermodel.PictureData;
-import org.apache.poi.xslf.extractor.XSLFPowerPointExtractor;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.animation.in.FlyIn;
 import org.maptalks.poi.animation.util.MergeConfig;
-import org.maptalks.poi.animation.util.SeegooPoiTool;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTGroupShape;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTPresentation;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTSlide;
+import org.maptalks.poi.animation.util.PPTTool;
 
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.maptalks.poi.animation.util.Slide;
-import org.maptalks.poi.animation.util.MergeConfig;
-
 
 
 /**
@@ -70,7 +52,7 @@ public class TestMergePPT {
 //        slides.add(new Slide(3, slide1));
         int[] removeIds = new int[] {1};
         MergeConfig config = new MergeConfig(removeIds, slides);
-        SeegooPoiTool.mergeSlidesToPPT(xmlSlideShow, config, outputPath);
+        PPTTool.mergeSlidesToPPT(xmlSlideShow, config, outputPath);
     }
 
 

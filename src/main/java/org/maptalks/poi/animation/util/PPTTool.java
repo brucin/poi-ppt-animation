@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by wangjun on 2016/12/11.
  */
-public class SeegooPoiTool {
+public class PPTTool {
 
     public static void mergeSlidesToPPT(XMLSlideShow xmlSlideShow, MergeConfig config, String outputPath) throws Exception {
         if(outputPath == null || outputPath.length() == 0) return;

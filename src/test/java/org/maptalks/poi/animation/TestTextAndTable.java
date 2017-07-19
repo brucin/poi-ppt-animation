@@ -17,16 +17,16 @@
 package org.maptalks.poi.animation;
 
 import org.apache.poi.sl.usermodel.*;
-import org.apache.poi.util.IOUtils;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
+import org.maptalks.poi.shape.*;
+import org.maptalks.poi.shape.TextBox;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Created by wangjun on 16/2/18.
@@ -63,17 +63,19 @@ public class TestTextAndTable {
         out.close();
 
         //add lable
-        XSLFTextBox shape = slide.createTextBox();
-        Rectangle2D textAnchor = new Rectangle2D.Double(14, 41, 91, 36);
-        shape.setAnchor(textAnchor);
-
-        shape.setLineColor(new Color(205,205,205));
-        shape.setFillColor(new Color(105,155,252));
-        shape.setVerticalAlignment(VerticalAlignment.MIDDLE);
-        XSLFTextRun textRun = shape.setText("文本标签");
-        textRun.setFontColor(new Color(132,108,226));
-        textRun.setFontSize(18.);
-        textRun.setFontFamily("microsoft yahei");
+//        XSLFTextBox shape = slide.createTextBox();
+//        Rectangle2D textAnchor = new Rectangle2D.Double(14, 41, 91, 36);
+//        shape.setAnchor(textAnchor);
+//
+//        shape.setLineColor(new Color(205,205,205));
+//        shape.setFillColor(new Color(105,155,252));
+//        shape.setVerticalAlignment(VerticalAlignment.MIDDLE);
+//        XSLFTextRun textRun = shape.setText("文本标签");
+//        textRun.setFontColor(new Color(132,108,226));
+//        textRun.setFontSize(18.);
+//        textRun.setFontFamily("microsoft yahei");
+        XSLFTextBox textBox = new TextBox("文本标签", 14, 41, 91, 36)
+                .addTo(slide);
 
         //add table
         XSLFTable table = slide.createTable();
