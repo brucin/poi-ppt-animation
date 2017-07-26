@@ -31,12 +31,13 @@ public class TextBox {
         this.textBoxSymbol = TextBoxSymbol.DEFAULT_SYMBOL;
     }
 
-    public TextBox(String text, double left, double top, double width, double height) {
+    public TextBox(String text, double left, double top, double width, double height, TextBoxSymbol symbol) {
         this.text = text;
         this.top = top;
         this.left = left;
         this.width = width;
         this.height = height;
+        this.textBoxSymbol = symbol;
     }
 
     public XSLFTextBox addTo(XSLFSlide slide) {
@@ -48,6 +49,7 @@ public class TextBox {
         textBox.setLineColor(this.textBoxSymbol.getLineColor());
         textBox.setFillColor(this.textBoxSymbol.getFillColor());
         textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
+        textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
 
         XSLFTextRun text = textBox.setText(this.text);
 

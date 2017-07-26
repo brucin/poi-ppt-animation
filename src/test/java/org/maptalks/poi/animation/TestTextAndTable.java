@@ -21,6 +21,7 @@ import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
 import org.maptalks.poi.shape.*;
 import org.maptalks.poi.shape.TextBox;
+import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -63,35 +64,39 @@ public class TestTextAndTable {
         out.close();
 
         //add lable
-//        XSLFTextBox shape = slide.createTextBox();
-//        Rectangle2D textAnchor = new Rectangle2D.Double(14, 41, 91, 36);
-//        shape.setAnchor(textAnchor);
-//
-//        shape.setLineColor(new Color(205,205,205));
-//        shape.setFillColor(new Color(105,155,252));
-//        shape.setVerticalAlignment(VerticalAlignment.MIDDLE);
-//        XSLFTextRun textRun = shape.setText("文本标签");
-//        textRun.setFontColor(new Color(132,108,226));
-//        textRun.setFontSize(18.);
-//        textRun.setFontFamily("microsoft yahei");
-        XSLFTextBox textBox = new TextBox("文本标签", 14, 41, 91, 36)
+        TextBoxSymbol symbol = new TextBoxSymbol();
+        symbol.setWordWrap(true);
+        XSLFTextBox textBox = new TextBox("文本标签文本标签文本标签文本标签文本标签", 14, 41, 50, 36, symbol)
                 .addTo(slide);
 
         //add table
-        XSLFTable table = slide.createTable();
-        table.setAnchor(new Rectangle2D.Double(550, 280, 300, 83));
-//        XSLFTableRow header = table.addRow();
-        String[] headers = {"序号","表头","表头","表头"};
-        this.addRow(headers, table, new Color(58,63,69), new Color(255,255,255));
-
-        String[] first = {"1","A","B","C"};
-        this.addRow(first, table, new Color(255,0,0), new Color(0,0,0));
-
-        String[] second = {"2","甲","乙","丙"};
-        this.addRow(second, table, new Color(250,252,72), new Color(0,0,0));
-
-        String[] third = {"3","测试","测试","测试"};
-        this.addRow(third, table, new Color(0,0,255), new Color(255,255,255));
+        String[][] rows = {{"序号","表头","表头","表头"},
+                {"1","A","B","C"},
+                {"2","甲","乙","丙"},
+                {"3","测试","测试","测试"}
+        };
+        TextBoxSymbol defaultSymbol = new TextBoxSymbol();
+        TextBoxSymbol[][] symbols = {{defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
+                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
+                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
+                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
+        };
+        double[] rowHeights = {16,16,16,16};
+        XSLFTable table = new Table(550, 280, 300, 83, rows, symbols, rowHeights).addTo(slide);
+//        XSLFTable table = slide.createTable();
+//        table.setAnchor(new Rectangle2D.Double(550, 280, 300, 83));
+////        XSLFTableRow header = table.addRow();
+//        String[] headers = {"序号","表头","表头","表头"};
+//        this.addRow(headers, table, new Color(58,63,69), new Color(255,255,255));
+//
+//        String[] first = {"1","A","B","C"};
+//        this.addRow(first, table, new Color(255,0,0), new Color(0,0,0));
+//
+//        String[] second = {"2","甲","乙","丙"};
+//        this.addRow(second, table, new Color(250,252,72), new Color(0,0,0));
+//
+//        String[] third = {"3","测试","测试","测试"};
+//        this.addRow(third, table, new Color(0,0,255), new Color(255,255,255));
 
         String savePath = this.getClass().getResource("/ppt").getPath();
         FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");

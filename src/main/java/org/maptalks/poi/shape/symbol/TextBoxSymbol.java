@@ -28,10 +28,12 @@ public class TextBoxSymbol {
 
     private Double fontSize = 12.0;
 
+    private boolean wordWrap = true;
+
     public TextBoxSymbol() {
     }
 
-    public TextBoxSymbol(Color lineColor, Color fillColor, Color fontColor, String vertical, String horizontal, String fontFamily, Double fontSize) {
+    public TextBoxSymbol(Color lineColor, Color fillColor, Color fontColor, String vertical, String horizontal, String fontFamily, Double fontSize, boolean wordWrap) {
         this.lineColor = lineColor;
         this.fillColor = fillColor;
         this.fontColor = fontColor;
@@ -39,6 +41,7 @@ public class TextBoxSymbol {
         this.horizontal = horizontal;
         this.fontFamily = fontFamily;
         this.fontSize = fontSize;
+        this.wordWrap = wordWrap;
     }
 
     public void setLineColor(Color lineColor) {
@@ -67,6 +70,10 @@ public class TextBoxSymbol {
 
     public void setFontSize(Double fontSize) {
         this.fontSize = fontSize;
+    }
+
+    public void setWordWrap(boolean wordWrap) {
+        this.wordWrap = wordWrap;
     }
 
     public static TextBoxSymbol getDefaultSymbol() {
@@ -99,6 +106,10 @@ public class TextBoxSymbol {
 
     public Double getFontSize() {
         return fontSize;
+    }
+
+    public boolean isWordWrap() {
+        return wordWrap;
     }
 
     public VerticalAlignment getVerticalAlignment() {

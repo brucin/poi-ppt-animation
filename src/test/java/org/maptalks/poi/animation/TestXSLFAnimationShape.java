@@ -31,6 +31,7 @@ import org.junit.Test;
 import org.maptalks.poi.animation.in.FlyIn;
 import org.maptalks.poi.animation.out.FlyOut;
 import org.maptalks.poi.shape.TextBox;
+import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
 /**
  * Created by wangjun on 16/2/18.
@@ -74,7 +75,8 @@ public class TestXSLFAnimationShape {
             XSLFAnimationType animationOutType = new FlyOut(picShape, directions[i]);
             animationTypes.add(animationOutType);
         }
-        XSLFTextBox textBox = new TextBox("文本标签", 14, 41, 91, 36)
+        TextBoxSymbol symbol = new TextBoxSymbol();
+        XSLFTextBox textBox = new TextBox("文本标签", 14, 41, 91, 36, symbol)
                 .addTo(slide);
 
         XSLFAnimationType animationType = new FlyIn(textBox, MoveDirection.RIGHT);
