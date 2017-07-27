@@ -1,13 +1,14 @@
 package org.maptalks.poi.shape;
 
-import org.apache.poi.sl.usermodel.Placeholder;
+import org.apache.poi.sl.draw.geom.Guide;
+import org.apache.poi.sl.usermodel.Insets2D;
 import org.apache.poi.sl.usermodel.TableCell;
+import org.apache.poi.sl.usermodel.TextParagraph;
 import org.apache.poi.sl.usermodel.TextShape;
-import org.apache.poi.sl.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xslf.usermodel.*;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
-import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -61,22 +62,26 @@ public class Table {
             String content = array[i];
             TextBoxSymbol symbol = rowSymbols[i];
             XSLFTableCell cell = row.addCell();
-            cell.setVerticalAlignment(symbol.getVerticalAlignment());
-            cell.setHorizontalCentered(true);
-            cell.setPlaceholder(Placeholder.TITLE);
-            cell.setTextPlaceholder(TextShape.TextPlaceholder.CENTER_TITLE);
-            cell.setWordWrap(symbol.isWordWrap());
-
             cell.setBorderColor(TableCell.BorderEdge.top, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.left, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.bottom, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.right, symbol.getLineColor());
             cell.setFillColor(symbol.getFillColor());
+            cell.clearText();
+            cell.setWordWrap(symbol.isWordWrap());
+            cell.setInsets(symbol.getInsetPadding());
+
+            cell.setVerticalAlignment(symbol.getVerticalAlignment());
+            TextParagraph textParagraph = cell.addNewTextParagraph();
+            textParagraph.setTextAlign(symbol.getHorizontalAlignment());
+            textParagraph.setLineSpacing(symbol.getLineSpacing());
 
             XSLFTextRun text = cell.setText(content);
             text.setFontColor(symbol.getFontColor());
             text.setFontSize(symbol.getFontSize());
             text.setFontFamily(symbol.getFontFamily());
+            text.setBold(symbol.isBold());
+            text.setItalic(symbol.isItalic());
         }
     }
 }

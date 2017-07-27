@@ -1,5 +1,7 @@
 package org.maptalks.poi.shape.symbol;
 
+import org.apache.poi.sl.usermodel.Insets2D;
+import org.apache.poi.sl.usermodel.TextParagraph;
 import org.apache.poi.sl.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
@@ -29,6 +31,14 @@ public class TextBoxSymbol {
     private Double fontSize = 12.0;
 
     private boolean wordWrap = true;
+
+    private Double[] padding = new Double[]{8.0, 2.0};
+
+    private Double lineSpacing = 1.0;
+
+    private String textWeight = "normal";
+
+    private String textStyle = "normal";
 
     public TextBoxSymbol() {
     }
@@ -76,6 +86,22 @@ public class TextBoxSymbol {
         this.wordWrap = wordWrap;
     }
 
+    public void setPadding(Double[] padding) {
+        this.padding = padding;
+    }
+
+    public void setLineSpacing(Double lineSpacing) {
+        this.lineSpacing = lineSpacing;
+    }
+
+    public void setTextWeight(String textWeight) {
+        this.textWeight = textWeight;
+    }
+
+    public void setTextStyle(String textStyle) {
+        this.textStyle = textStyle;
+    }
+
     public static TextBoxSymbol getDefaultSymbol() {
         return DEFAULT_SYMBOL;
     }
@@ -112,6 +138,22 @@ public class TextBoxSymbol {
         return wordWrap;
     }
 
+    public Double[] getPadding() {
+        return padding;
+    }
+
+    public Double getLineSpacing() {
+        return lineSpacing;
+    }
+
+    public String getTextWeight() {
+        return textWeight;
+    }
+
+    public String getTextStyle() {
+        return textStyle;
+    }
+
     public VerticalAlignment getVerticalAlignment() {
         if(this.getVertical().equals("top")) {
             return VerticalAlignment.TOP;
@@ -122,13 +164,51 @@ public class TextBoxSymbol {
         }
     }
 
-    public HorizontalAlignment getHorizontalAlignment() {
+    public TextParagraph.TextAlign getHorizontalAlignment() {
         if(this.getHorizontal().equals("left")) {
-            return HorizontalAlignment.LEFT;
+            return TextParagraph.TextAlign.LEFT;
         } else if(this.getHorizontal().equals("right")) {
-            return HorizontalAlignment.RIGHT;
+            return TextParagraph.TextAlign.RIGHT;
         } else {
-            return HorizontalAlignment.CENTER;
+            return TextParagraph.TextAlign.CENTER;
+        }
+    }
+
+    public Insets2D getInsetPadding() {
+        double top = 0.0, left = 0.0, bottom = 0.0, right = 0.0;
+        Double[] padding = this.getPadding();
+        int length = padding.length;
+        if(length == 1) {
+            top = left = bottom = right = padding[0];
+        } else if(length == 2) {
+            top = bottom = padding[0];
+            left = right = padding[1];
+        } else if(length == 3) {
+            top = padding[0];
+            left = right = padding[1];
+            bottom = padding[2];
+        } else if(length == 4) {
+            top = padding[0];
+            left = padding[1];
+            bottom = padding[2];
+            right = padding[3];
+        }
+        return new Insets2D(top, left, bottom, right);
+    }
+
+    public boolean isBold() {
+        if(this.getTextWeight().equals("normal")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean isItalic() {
+        if(this.getTextStyle().equals("normal")) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

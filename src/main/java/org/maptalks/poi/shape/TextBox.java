@@ -1,5 +1,8 @@
 package org.maptalks.poi.shape;
 
+import org.apache.poi.sl.usermodel.TextParagraph;
+import org.apache.poi.sl.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.apache.poi.xslf.usermodel.XSLFTextBox;
 import org.apache.poi.xslf.usermodel.XSLFTextRun;
@@ -48,14 +51,19 @@ public class TextBox {
 
         textBox.setLineColor(this.textBoxSymbol.getLineColor());
         textBox.setFillColor(this.textBoxSymbol.getFillColor());
-        textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
         textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
+        textBox.setInsets(this.textBoxSymbol.getInsetPadding());
+        textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
+        TextParagraph textParagraph = textBox.addNewTextParagraph();
+        textParagraph.setTextAlign(this.textBoxSymbol.getHorizontalAlignment());
+        textParagraph.setLineSpacing(this.textBoxSymbol.getLineSpacing());
 
         XSLFTextRun text = textBox.setText(this.text);
-
         text.setFontColor(this.textBoxSymbol.getFontColor());
         text.setFontSize(this.textBoxSymbol.getFontSize());
         text.setFontFamily(this.textBoxSymbol.getFontFamily());
+        text.setBold(this.textBoxSymbol.isBold());
+        text.setItalic(this.textBoxSymbol.isItalic());
         return textBox;
     }
 }

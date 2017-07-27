@@ -66,7 +66,7 @@ public class TestTextAndTable {
         //add lable
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
-        XSLFTextBox textBox = new TextBox("文本标签文本标签文本标签文本标签文本标签", 14, 41, 50, 36, symbol)
+        XSLFTextBox textBox = new TextBox("文本", 14, 41, 200, 60, symbol)
                 .addTo(slide);
 
         //add table
@@ -102,30 +102,6 @@ public class TestTextAndTable {
         FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");
         pptx.write(output);
         output.close();
-    }
-
-    private void addRow(String[] array, XSLFTable table, Color fill, Color fontColor) {
-        XSLFTableRow row = table.addRow();
-        row.setHeight(12.);
-        for (int i = 0; i < array.length; i++) {
-            String str = array[i];
-            XSLFTableCell cell = row.addCell();
-            cell.setVerticalAlignment(VerticalAlignment.MIDDLE);
-            cell.setHorizontalCentered(true);
-            cell.setPlaceholder(Placeholder.TITLE);
-            cell.setTextPlaceholder(TextShape.TextPlaceholder.CENTER_TITLE);
-
-            cell.setBorderColor(TableCell.BorderEdge.top, new Color(205,205,205));
-            cell.setBorderColor(TableCell.BorderEdge.left, new Color(205,205,205));
-            cell.setBorderColor(TableCell.BorderEdge.bottom, new Color(205,205,205));
-            cell.setBorderColor(TableCell.BorderEdge.right, new Color(205,205,205));
-            cell.setFillColor(fill);
-
-            XSLFTextRun text = cell.setText(str);
-            text.setFontColor(fontColor);
-            text.setFontSize(16.);
-            text.setFontFamily("microsoft yahei");
-        }
     }
    
 }
