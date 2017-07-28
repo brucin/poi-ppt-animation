@@ -175,7 +175,7 @@ public class FlyOut extends XSLFAnimationType{
         String result = new String("");
         if(this.moveDirection.equals(MoveDirection.LEFT)) {
             if(locTag.equals("ppt_x")) {
-                result = "0-ppt_w";
+                result = "0-ppt_w/2";
             } else {
                 result = "ppt_y";
             } 

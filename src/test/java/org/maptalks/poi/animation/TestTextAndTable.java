@@ -66,7 +66,13 @@ public class TestTextAndTable {
         //add lable
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
-        XSLFTextBox textBox = new TextBox("文本", 14, 41, 200, 60, symbol)
+        symbol.setTextWeight("bold");
+        symbol.setTextStyle("italic");
+        Double[] padding = {3.0, 6.0, 9.0, 16.0};
+        symbol.setPadding(padding);
+        symbol.setLineSpacing(2.0);
+
+        XSLFTextBox textBox = new TextBox("文本文本文本", 14, 41, 60, 60, symbol)
                 .addTo(slide);
 
         //add table
@@ -83,21 +89,6 @@ public class TestTextAndTable {
         };
         double[] rowHeights = {16,16,16,16};
         XSLFTable table = new Table(550, 280, 300, 83, rows, symbols, rowHeights).addTo(slide);
-//        XSLFTable table = slide.createTable();
-//        table.setAnchor(new Rectangle2D.Double(550, 280, 300, 83));
-////        XSLFTableRow header = table.addRow();
-//        String[] headers = {"序号","表头","表头","表头"};
-//        this.addRow(headers, table, new Color(58,63,69), new Color(255,255,255));
-//
-//        String[] first = {"1","A","B","C"};
-//        this.addRow(first, table, new Color(255,0,0), new Color(0,0,0));
-//
-//        String[] second = {"2","甲","乙","丙"};
-//        this.addRow(second, table, new Color(250,252,72), new Color(0,0,0));
-//
-//        String[] third = {"3","测试","测试","测试"};
-//        this.addRow(third, table, new Color(0,0,255), new Color(255,255,255));
-
         String savePath = this.getClass().getResource("/ppt").getPath();
         FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");
         pptx.write(output);

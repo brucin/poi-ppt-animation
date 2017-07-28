@@ -53,7 +53,7 @@ public class TestXSLFAnimationShape {
         directions[3] = MoveDirection.RIGHT;
         directions[4] = MoveDirection.BOTTOM;
         String pathStr = this.getClass().getResource("/images").getPath();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             String fileName = pathStr+"/"+(i+1)+".png";
             File downloadeFile = new File(fileName);
             BufferedInputStream in = new  BufferedInputStream(new FileInputStream(downloadeFile));
@@ -75,14 +75,7 @@ public class TestXSLFAnimationShape {
             XSLFAnimationType animationOutType = new FlyOut(picShape, directions[i]);
             animationTypes.add(animationOutType);
         }
-        TextBoxSymbol symbol = new TextBoxSymbol();
-        XSLFTextBox textBox = new TextBox("文本标签", 14, 41, 91, 36, symbol)
-                .addTo(slide);
-
-        XSLFAnimationType animationType = new FlyIn(textBox, MoveDirection.RIGHT);
-        animationTypes.add(animationType);
-
-        slide = animation.addAnimationToSlide(slide, animationTypes); 
+        animation.addAnimationToSlide(slide, animationTypes);
         FileOutputStream out = new FileOutputStream(pathStr+"/temp.pptx");
         pptx.write(out);
         out.close();   

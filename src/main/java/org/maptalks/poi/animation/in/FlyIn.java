@@ -1,5 +1,6 @@
 package org.maptalks.poi.animation.in;
 
+import java.awt.geom.Rectangle2D;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -170,13 +171,13 @@ public class FlyIn extends XSLFAnimationType {
         String result = new String("");
         if(this.moveDirection.equals(MoveDirection.LEFT)) {
             if(locTag.equals("ppt_x")) {
-                result = "0-#ppt_w";
+                result = "0-#ppt_w/2";
             } else {
                 result = "#ppt_y";
             } 
         } else if(this.moveDirection.equals(MoveDirection.RIGHT)) {
             if(locTag.equals("ppt_x")) {
-                result = "#ppt_w";
+                result = "1+#ppt_w/2";
             } else {
                 result = "#ppt_y";
             }
@@ -184,13 +185,13 @@ public class FlyIn extends XSLFAnimationType {
             if(locTag.equals("ppt_x")) {
                 result = "#ppt_x";
             } else {
-                result = "0-#ppt_h";
+                result = "0-#ppt_h/2";
             }
         }  else if(this.moveDirection.equals(MoveDirection.BOTTOM)) {
             if(locTag.equals("ppt_x")) {
                 result = "#ppt_x";
             } else {
-                result = "#ppt_h";
+                result = "1+#ppt_h/2";
             }
         } 
         return result;
