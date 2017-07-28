@@ -16,10 +16,11 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import org.apache.poi.sl.usermodel.*;
+import org.apache.poi.sl.usermodel.PictureData;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.*;
+import org.maptalks.poi.animation.in.FlyIn;
+import org.maptalks.poi.shape.Table;
 import org.maptalks.poi.shape.TextBox;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
@@ -28,14 +29,15 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.*;
 
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestTextAndTable {
-    
+public class TestVectorGroupAnimation {
+
     @Test
-    public void test() throws Exception {
+    public void testGroupAnimation() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -57,7 +59,7 @@ public class TestTextAndTable {
         }
         in.close();
         byte[] content = out.toByteArray();
-        XSLFPictureData pictureData = pptx.addPicture(content, org.apache.poi.sl.usermodel.PictureData.PictureType.PNG);
+        XSLFPictureData pictureData = pptx.addPicture(content, PictureData.PictureType.PNG);
         XSLFPictureShape picShape = slide.createPicture(pictureData);
         picShape.setLineWidth(0);
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
@@ -72,8 +74,9 @@ public class TestTextAndTable {
         symbol.setPadding(padding);
         symbol.setLineSpacing(2.0);
 
+        XSLFGroupShape group = slide.createGroup();
         XSLFTextBox textBox = new TextBox("文本文本文本", 14, 41, 60, 60, symbol)
-                .convertTo(slide.createTextBox());
+                .convertTo(group.createTextBox());
 
         //add table
         String[][] rows = {{"序号","表头","表头","表头"},
@@ -88,9 +91,23 @@ public class TestTextAndTable {
                 {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
         };
         double[] rowHeights = {16,16,16,16};
-        XSLFTable table = new Table(550, 280, 300, 83, rows, symbols, rowHeights).convertTo(slide.createTable());
+        XSLFTable table = new Table(550, 280, 300, 83, rows, symbols, rowHeights).convertTo(group.createTable());
+
+        java.util.List<XSLFAnimationType> animationTypes = new ArrayList<XSLFAnimationType>();
+        XSLFAnimation animation = new XSLFAnimation();
+        XSLFAnimationType topAnimation = new FlyIn(group, MoveDirection.TOP);
+//        XSLFAnimationType bottomAnimation = new FlyIn(group, MoveDirection.BOTTOM);
+//        XSLFAnimationType leftAnimation = new FlyIn(group, MoveDirection.LEFT);
+//        XSLFAnimationType rightAnimation = new FlyIn(group, MoveDirection.RIGHT);
+        animationTypes.add(topAnimation);
+//        animationTypes.add(bottomAnimation);
+//        animationTypes.add(leftAnimation);
+//        animationTypes.add(rightAnimation);
+
+        animation.addAnimationToSlide(slide, animationTypes);
+
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/group_animation.pptx");
         pptx.write(output);
         output.close();
     }

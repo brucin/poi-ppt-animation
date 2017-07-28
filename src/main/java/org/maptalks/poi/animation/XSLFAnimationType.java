@@ -2,6 +2,7 @@ package org.maptalks.poi.animation;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xslf.usermodel.XSLFSimpleShape;
 import org.apache.xmlbeans.XmlException;
 import org.w3c.dom.Document;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class XSLFAnimationType {
 
-    protected XSLFSimpleShape shape;
+    protected XSLFShape shape;
 
     protected String moveDirection;
 

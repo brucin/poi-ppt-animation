@@ -43,7 +43,7 @@ public class TestVectorZoomIn {
 
         TextBoxSymbol symbol = new TextBoxSymbol();
         XSLFTextBox textBox = new TextBox("文本标签", 100, 160,91, 36, symbol)
-                .addTo(slide);
+                .convertTo(slide.createTextBox());
         XSLFAnimationType zoomInAnimation = new ZoomIn(textBox, MoveDirection.TOP);
         animationTypes.add(zoomInAnimation);
 

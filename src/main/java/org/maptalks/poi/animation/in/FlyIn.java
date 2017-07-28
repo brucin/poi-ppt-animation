@@ -11,11 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xslf.usermodel.XSLFPictureData;
-import org.apache.poi.xslf.usermodel.XSLFPictureShape;
-import org.apache.poi.xslf.usermodel.XSLFSimpleShape;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.xslf.usermodel.*;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.maptalks.poi.animation.MoveDirection;
@@ -30,7 +26,7 @@ import org.w3c.dom.Text;
  */
 public class FlyIn extends XSLFAnimationType {
 
-    public FlyIn(XSLFSimpleShape shape, String moveDirection) {
+    public FlyIn(XSLFShape shape, String moveDirection) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = "clickEffect";

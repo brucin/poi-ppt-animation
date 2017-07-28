@@ -44,7 +44,7 @@ public class TestVectorFlyIn {
 
         TextBoxSymbol symbol = new TextBoxSymbol();
         XSLFTextBox textBox = new TextBox("文本标签", 100, 160,91, 36, symbol)
-                .addTo(slide);
+                .convertTo(slide.createTextBox());
         XSLFAnimationType topAnimation = new FlyIn(textBox, MoveDirection.TOP);
         XSLFAnimationType bottomAnimation = new FlyIn(textBox, MoveDirection.BOTTOM);
         XSLFAnimationType leftAnimation = new FlyIn(textBox, MoveDirection.LEFT);

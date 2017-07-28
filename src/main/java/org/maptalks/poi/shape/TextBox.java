@@ -43,9 +43,9 @@ public class TextBox {
         this.textBoxSymbol = symbol;
     }
 
-    public XSLFTextBox addTo(XSLFSlide slide) {
-        if(slide == null) return null;
-        XSLFTextBox textBox = slide.createTextBox();
+    public XSLFTextBox convertTo(XSLFTextBox textBox) {
+        if(textBox == null) return null;
+//        XSLFTextBox textBox = slide.createTextBox();
         Rectangle2D textAnchor = new Rectangle2D.Double(this.left, this.top, this.width, this.height);
         textBox.setAnchor(textAnchor);
 

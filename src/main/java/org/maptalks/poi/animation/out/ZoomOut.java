@@ -1,5 +1,6 @@
 package org.maptalks.poi.animation.out;
 
+import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xslf.usermodel.XSLFSimpleShape;
 import org.apache.xmlbeans.XmlException;
 import org.maptalks.poi.animation.XSLFAnimation;
@@ -15,7 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class ZoomOut extends XSLFAnimationType {
 
-    public ZoomOut(XSLFSimpleShape shape, String moveDirection) {
+    public ZoomOut(XSLFShape shape, String moveDirection) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = "clickEffect";

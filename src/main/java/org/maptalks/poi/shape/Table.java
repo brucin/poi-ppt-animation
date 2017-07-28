@@ -40,9 +40,9 @@ public class Table {
         this.rowHeights = rowHeights;
     }
 
-    public XSLFTable addTo(XSLFSlide slide) {
-        if(slide == null || this.rows == null) return null;
-        XSLFTable table = slide.createTable();
+    public XSLFTable convertTo(XSLFTable table) {
+        if(table == null || this.rows == null) return null;
+//        XSLFTable table = slide.createTable();
         Rectangle2D anchor = new Rectangle2D.Double(this.left, this.top, this.width, this.height);
         table.setAnchor(anchor);
         for (int i = 0; i < this.rows.length; i++) {
@@ -51,7 +51,6 @@ public class Table {
             double rowHeight = this.rowHeights[i];
             this.addRow(table, row, rowSymbols, rowHeight);
         }
-
         return table;
     }
 
