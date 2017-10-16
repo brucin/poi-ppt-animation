@@ -1,9 +1,6 @@
 package org.maptalks.poi.shape;
 
 import org.apache.poi.sl.usermodel.TextParagraph;
-import org.apache.poi.sl.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.apache.poi.xslf.usermodel.XSLFTextBox;
 import org.apache.poi.xslf.usermodel.XSLFTextRun;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
@@ -45,7 +42,6 @@ public class TextBox {
 
     public XSLFTextBox convertTo(XSLFTextBox textBox) {
         if(textBox == null) return null;
-//        XSLFTextBox textBox = slide.createTextBox();
         Rectangle2D textAnchor = new Rectangle2D.Double(this.left, this.top, this.width, this.height);
         textBox.setAnchor(textAnchor);
 

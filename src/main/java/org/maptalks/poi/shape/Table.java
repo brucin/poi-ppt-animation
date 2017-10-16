@@ -1,11 +1,7 @@
 package org.maptalks.poi.shape;
 
-import org.apache.poi.sl.draw.geom.Guide;
-import org.apache.poi.sl.usermodel.Insets2D;
 import org.apache.poi.sl.usermodel.TableCell;
 import org.apache.poi.sl.usermodel.TextParagraph;
-import org.apache.poi.sl.usermodel.TextShape;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xslf.usermodel.*;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
@@ -42,7 +38,6 @@ public class Table {
 
     public XSLFTable convertTo(XSLFTable table) {
         if(table == null || this.rows == null) return null;
-//        XSLFTable table = slide.createTable();
         Rectangle2D anchor = new Rectangle2D.Double(this.left, this.top, this.width, this.height);
         table.setAnchor(anchor);
         for (int i = 0; i < this.rows.length; i++) {

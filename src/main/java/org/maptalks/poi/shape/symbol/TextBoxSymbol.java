@@ -3,7 +3,6 @@ package org.maptalks.poi.shape.symbol;
 import org.apache.poi.sl.usermodel.Insets2D;
 import org.apache.poi.sl.usermodel.TextParagraph;
 import org.apache.poi.sl.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
 import java.awt.*;
 
