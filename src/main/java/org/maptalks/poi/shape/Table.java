@@ -10,15 +10,7 @@ import java.awt.geom.Rectangle2D;
 /**
  * Created by wangjun on 2017/7/20.
  */
-public class Table {
-
-    private double left = 0.0;
-
-    private double top = 0.0;
-
-    private double width = 0.0;
-
-    private double height = 0.0;
+public class Table extends Shape {
 
     private String[][] rows = null;
 
