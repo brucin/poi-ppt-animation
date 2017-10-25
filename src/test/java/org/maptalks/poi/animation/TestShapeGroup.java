@@ -75,7 +75,7 @@ public class TestShapeGroup {
 
 //        XSLFGroupShape group = slide.createGroup();
         ShapeGroup group = new ShapeGroup();
-        TextBox textBox = new TextBox("文本文本文本", 14, 41, 60, 60, symbol);
+        TextBox textBox = new TextBox("文本文本文本", 14.0, 41.0, 60.0, 60.0, symbol);
 //                .convertTo(group.createTextBox());
         group.addToList(textBox);
         //add table
@@ -90,8 +90,8 @@ public class TestShapeGroup {
                 {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
                 {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
         };
-        double[] rowHeights = {16,16,16,16};
-        Table table = new Table(550, 280, 300, 83, rows, symbols, rowHeights);
+        Double[] rowHeights = {16.0,16.0,16.0,16.0};
+        Table table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights);
 //                .convertTo(group.createTable());
         group.addToList(table);
         group.convertTo(slide.createGroup());

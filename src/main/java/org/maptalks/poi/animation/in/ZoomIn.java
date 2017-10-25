@@ -24,7 +24,7 @@ public class ZoomIn extends XSLFAnimationType {
         this.presetSubtype = "16";
     }
 
-    public ZoomIn(XSLFSimpleShape shape, String moveDirection, String nodeType) {
+    public ZoomIn(XSLFShape shape, String moveDirection, String nodeType) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = nodeType;

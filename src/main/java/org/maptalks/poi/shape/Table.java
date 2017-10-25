@@ -16,9 +16,9 @@ public class Table extends Shape {
 
     private TextBoxSymbol[][] symbols = null;
 
-    private double[] rowHeights = null;
+    private Double[] rowHeights = null;
 
-    public Table(double left, double top, double width, double height, String[][] rows, TextBoxSymbol[][] symbols, double[] rowHeights) {
+    public Table(Double left, Double top, Double width, Double height, String[][] rows, TextBoxSymbol[][] symbols, Double[] rowHeights) {
         this.left = left;
         this.top = top;
         this.width = width;

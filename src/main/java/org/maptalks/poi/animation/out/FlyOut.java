@@ -24,7 +24,7 @@ public class FlyOut extends XSLFAnimationType{
         this.presetSubtype = this.getPresettype(moveDirection);
     }
 
-    public FlyOut(XSLFSimpleShape shape, String moveDirection, String nodeType) {
+    public FlyOut(XSLFShape shape, String moveDirection, String nodeType) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = nodeType;

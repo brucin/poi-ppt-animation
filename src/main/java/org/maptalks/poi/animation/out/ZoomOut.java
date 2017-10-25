@@ -23,7 +23,7 @@ public class ZoomOut extends XSLFAnimationType {
         this.presetSubtype = "32";
     }
 
-    public ZoomOut(XSLFSimpleShape shape, String moveDirection, String nodeType) {
+    public ZoomOut(XSLFShape shape, String moveDirection, String nodeType) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = nodeType;

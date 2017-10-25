@@ -33,7 +33,7 @@ public class FlyIn extends XSLFAnimationType {
         this.presetSubtype = this.getPresettype(moveDirection);
     }
 
-    public FlyIn(XSLFSimpleShape shape, String moveDirection, String nodeType) {
+    public FlyIn(XSLFShape shape, String moveDirection, String nodeType) {
         this.shape = shape;
         this.moveDirection = moveDirection;
         this.nodeType = nodeType;

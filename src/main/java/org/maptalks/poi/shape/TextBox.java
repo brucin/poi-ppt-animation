@@ -18,12 +18,12 @@ public class TextBox extends Shape {
 
     public TextBox(String text) {
         this.text = text;
-        this.width = 100;
-        this.height = 16;
+        this.width = 100.0;
+        this.height = 16.0;
         this.textBoxSymbol = TextBoxSymbol.DEFAULT_SYMBOL;
     }
 
-    public TextBox(String text, double left, double top, double width, double height, TextBoxSymbol symbol) {
+    public TextBox(String text, Double left, Double top, Double width, Double height, TextBoxSymbol symbol) {
         this.text = text;
         this.top = top;
         this.left = left;

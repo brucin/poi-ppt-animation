@@ -75,7 +75,7 @@ public class TestVectorGroupAnimation {
         symbol.setLineSpacing(2.0);
 
         XSLFGroupShape group = slide.createGroup();
-        XSLFTextBox textBox = new TextBox("文本文本文本", 14, 41, 60, 60, symbol)
+        XSLFTextBox textBox = new TextBox("文本文本文本", 14.0, 41.0, 60.0, 60.0, symbol)
                 .convertTo(group.createTextBox());
 
         //add table
@@ -90,8 +90,8 @@ public class TestVectorGroupAnimation {
                 {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
                 {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
         };
-        double[] rowHeights = {16,16,16,16};
-        XSLFTable table = new Table(550, 280, 300, 83, rows, symbols, rowHeights).convertTo(group.createTable());
+        Double[] rowHeights = {16.0,16.0,16.0,16.0};
+        XSLFTable table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights).convertTo(group.createTable());
 
         java.util.List<XSLFAnimationType> animationTypes = new ArrayList<XSLFAnimationType>();
         XSLFAnimation animation = new XSLFAnimation();
