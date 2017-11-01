@@ -16,10 +16,15 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import org.apache.poi.sl.usermodel.*;
-import org.apache.poi.xslf.usermodel.*;
+import org.apache.poi.sl.usermodel.PictureData;
+import org.apache.poi.sl.usermodel.ShapeType;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
+import org.apache.poi.xslf.usermodel.XSLFPictureData;
+import org.apache.poi.xslf.usermodel.XSLFPictureShape;
+import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.junit.Test;
-import org.maptalks.poi.shape.*;
+import org.maptalks.poi.group.ShapeGroup;
+import org.maptalks.poi.shape.Table;
 import org.maptalks.poi.shape.TextBox;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
@@ -32,10 +37,10 @@ import java.io.*;
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestTextAndTable {
-    
+public class TestShapeType {
+
     @Test
-    public void test() throws Exception {
+    public void testShapeType() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -57,40 +62,41 @@ public class TestTextAndTable {
         }
         in.close();
         byte[] content = out.toByteArray();
-        XSLFPictureData pictureData = pptx.addPicture(content, org.apache.poi.sl.usermodel.PictureData.PictureType.PNG);
+        XSLFPictureData pictureData = pptx.addPicture(content, PictureData.PictureType.PNG);
         XSLFPictureShape picShape = slide.createPicture(pictureData);
         picShape.setLineWidth(0);
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
         out.close();
 
-        //add label
-        TextBoxSymbol symbol = new TextBoxSymbol();
-        symbol.setWordWrap(true);
-        symbol.setTextWeight("bold");
-        symbol.setTextStyle("italic");
+        //add rectangle label
+        TextBoxSymbol rectangleSymbol = new TextBoxSymbol();
+        rectangleSymbol.setWordWrap(true);
+        rectangleSymbol.setTextWeight("bold");
+        rectangleSymbol.setTextStyle("italic");
         Double[] padding = {3.0, 6.0, 9.0, 16.0};
-        symbol.setPadding(padding);
-        symbol.setLineSpacing(2.0);
+        rectangleSymbol.setPadding(padding);
+        rectangleSymbol.setLineSpacing(2.0);
 
-        XSLFTextBox textBox = new TextBox("文本文本文本", 14.0, 41.0, 60.0, 60.0, symbol)
-                .convertTo(slide.createTextBox());
+        ShapeGroup group = new ShapeGroup();
+        TextBox rectangleBox = new TextBox("矩形文本标签", 14.0, 41.0, 60.0, 60.0, rectangleSymbol);
+        group.addToList(rectangleBox);
 
-        //add table
-        String[][] rows = {{"序号","表头","表头","表头"},
-                {"1","A","B","C"},
-                {"2","甲","乙","丙"},
-                {"3","测试","测试","测试"}
-        };
-        TextBoxSymbol defaultSymbol = new TextBoxSymbol();
-        TextBoxSymbol[][] symbols = {{defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
-        };
-        Double[] rowHeights = {16.0,16.0,16.0,16.0};
-        XSLFTable table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights).convertTo(slide.createTable());
+        //add ellipse label
+        TextBoxSymbol ellipseSymbol = new TextBoxSymbol();
+        ellipseSymbol.setBoxType(ShapeType.ELLIPSE);
+        ellipseSymbol.setWordWrap(true);
+        ellipseSymbol.setTextWeight("bold");
+        ellipseSymbol.setTextStyle("italic");
+//        Double[] padding = {3.0, 6.0, 9.0, 16.0};
+        ellipseSymbol.setPadding(padding);
+        ellipseSymbol.setLineSpacing(2.0);
+
+        TextBox ellipseBox = new TextBox("圆形文本标签", 100.0, 80.0, 60.0, 60.0, ellipseSymbol);
+        group.addToList(ellipseBox);
+
+        group.convertTo(slide.createGroup());
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/group_type.pptx");
         pptx.write(output);
         output.close();
     }

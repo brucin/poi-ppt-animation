@@ -1,6 +1,7 @@
 package org.maptalks.poi.shape.symbol;
 
 import org.apache.poi.sl.usermodel.Insets2D;
+import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.sl.usermodel.TextParagraph;
 import org.apache.poi.sl.usermodel.VerticalAlignment;
 
@@ -38,6 +39,8 @@ public class TextBoxSymbol {
     private String textWeight = "normal";
 
     private String textStyle = "normal";
+
+    private ShapeType boxType = ShapeType.RECT;
 
     public TextBoxSymbol() {
     }
@@ -101,6 +104,10 @@ public class TextBoxSymbol {
         this.textStyle = textStyle;
     }
 
+    public void setBoxType(ShapeType boxType) {
+        this.boxType = boxType;
+    }
+
     public static TextBoxSymbol getDefaultSymbol() {
         return DEFAULT_SYMBOL;
     }
@@ -151,6 +158,10 @@ public class TextBoxSymbol {
 
     public String getTextStyle() {
         return textStyle;
+    }
+
+    public ShapeType getBoxType() {
+        return boxType;
     }
 
     public VerticalAlignment getVerticalAlignment() {

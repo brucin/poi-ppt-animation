@@ -64,7 +64,7 @@ public class TestShapeGroup {
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
         out.close();
 
-        //add lable
+        //add label
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
         symbol.setTextWeight("bold");
