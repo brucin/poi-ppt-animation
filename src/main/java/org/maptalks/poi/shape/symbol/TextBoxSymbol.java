@@ -4,8 +4,10 @@ import org.apache.poi.sl.usermodel.Insets2D;
 import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.sl.usermodel.TextParagraph;
 import org.apache.poi.sl.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Created by wangjun on 2017/7/20.
@@ -174,7 +176,17 @@ public class TextBoxSymbol {
         }
     }
 
-    public TextParagraph.TextAlign getHorizontalAlignment() {
+    public HorizontalAlignment getHorizontalAlignment() {
+        if(this.getHorizontal().equals("left")) {
+            return HorizontalAlignment.LEFT;
+        } else if(this.getHorizontal().equals("right")) {
+            return HorizontalAlignment.RIGHT;
+        } else {
+            return HorizontalAlignment.CENTER;
+        }
+    }
+
+    public TextParagraph.TextAlign getTextAlign() {
         if(this.getHorizontal().equals("left")) {
             return TextParagraph.TextAlign.LEFT;
         } else if(this.getHorizontal().equals("right")) {
@@ -220,5 +232,24 @@ public class TextBoxSymbol {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "TextBoxSymbol{" +
+                "lineColor=" + lineColor +
+                ", fillColor=" + fillColor +
+                ", fontColor=" + fontColor +
+                ", vertical='" + vertical + '\'' +
+                ", horizontal='" + horizontal + '\'' +
+                ", fontFamily='" + fontFamily + '\'' +
+                ", fontSize=" + fontSize +
+                ", wordWrap=" + wordWrap +
+                ", padding=" + Arrays.toString(padding) +
+                ", lineSpacing=" + lineSpacing +
+                ", textWeight='" + textWeight + '\'' +
+                ", textStyle='" + textStyle + '\'' +
+                ", boxType=" + boxType +
+                '}';
     }
 }

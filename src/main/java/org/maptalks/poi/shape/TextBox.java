@@ -2,6 +2,7 @@ package org.maptalks.poi.shape;
 
 import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.sl.usermodel.TextParagraph;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xslf.usermodel.XSLFShapeContainer;
 import org.apache.poi.xslf.usermodel.XSLFTextBox;
 import org.apache.poi.xslf.usermodel.XSLFTextRun;
@@ -44,11 +45,16 @@ public class TextBox extends Shape {
         textBox.setFillColor(this.textBoxSymbol.getFillColor());
         textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
         textBox.setInsets(this.textBoxSymbol.getInsetPadding());
-        textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
-        TextParagraph textParagraph = textBox.addNewTextParagraph();
-        textParagraph.setTextAlign(this.textBoxSymbol.getHorizontalAlignment());
-        textParagraph.setLineSpacing(this.textBoxSymbol.getLineSpacing());
 
+        textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
+
+        TextParagraph textParagraph = textBox.addNewTextParagraph();
+        if(this.textBoxSymbol.getHorizontalAlignment().equals(HorizontalAlignment.CENTER)) {
+            textBox.setHorizontalCentered(true);
+        } else {
+            textParagraph.setTextAlign(this.textBoxSymbol.getTextAlign());
+        }
+        textParagraph.setLineSpacing(this.textBoxSymbol.getLineSpacing());
         XSLFTextRun text = textBox.setText(this.text);
         text.setFontColor(this.textBoxSymbol.getFontColor());
         text.setFontSize(this.textBoxSymbol.getFontSize());

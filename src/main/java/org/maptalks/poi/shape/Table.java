@@ -59,7 +59,7 @@ public class Table extends Shape {
 
             cell.setVerticalAlignment(symbol.getVerticalAlignment());
             TextParagraph textParagraph = cell.addNewTextParagraph();
-            textParagraph.setTextAlign(symbol.getHorizontalAlignment());
+            textParagraph.setTextAlign(symbol.getTextAlign());
             textParagraph.setLineSpacing(symbol.getLineSpacing());
 
             XSLFTextRun text = cell.setText(content);
