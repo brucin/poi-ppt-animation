@@ -1,5 +1,6 @@
 package org.maptalks.poi.shape;
 
+import org.apache.poi.sl.usermodel.PaintStyle;
 import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.sl.usermodel.TextParagraph;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -42,12 +43,12 @@ public class TextBox extends Shape {
 
         textBox.setShapeType(this.textBoxSymbol.getBoxType());
         textBox.setLineColor(this.textBoxSymbol.getLineColor());
+//        textBox.setLineWidth(this.textBoxSymbol.getLineWidth());
         textBox.setFillColor(this.textBoxSymbol.getFillColor());
         textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
         textBox.setInsets(this.textBoxSymbol.getInsetPadding());
 
         textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
-
         TextParagraph textParagraph = textBox.addNewTextParagraph();
         if(this.textBoxSymbol.getHorizontalAlignment().equals(HorizontalAlignment.CENTER)) {
             textBox.setHorizontalCentered(true);

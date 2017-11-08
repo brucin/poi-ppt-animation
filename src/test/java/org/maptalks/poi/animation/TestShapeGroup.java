@@ -91,7 +91,8 @@ public class TestShapeGroup {
                 {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
         };
         Double[] rowHeights = {16.0,16.0,16.0,16.0};
-        Table table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights);
+        Double[] colWidths = {30.0,40.0,50.0,60.0};
+        Table table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights, colWidths);
 //                .convertTo(group.createTable());
         group.addToList(table);
         group.convertTo(slide.createGroup());

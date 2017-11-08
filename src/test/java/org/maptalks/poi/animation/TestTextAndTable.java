@@ -88,7 +88,8 @@ public class TestTextAndTable {
                 {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
         };
         Double[] rowHeights = {16.0,16.0,16.0,16.0};
-        XSLFTable table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights).convertTo(slide.createTable());
+        Double[] colWidths = {30.0,40.0,50.0,60.0};
+        XSLFTable table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights, colWidths).convertTo(slide.createTable());
         String savePath = this.getClass().getResource("/ppt").getPath();
         FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");
         pptx.write(output);

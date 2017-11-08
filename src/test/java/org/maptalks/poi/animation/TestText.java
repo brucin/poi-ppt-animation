@@ -66,6 +66,7 @@ public class TestText {
         //add label
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
+        symbol.setLineColor(null);
         symbol.setTextWeight("bold");
         symbol.setTextStyle("italic");
         symbol.setHorizontal("center");

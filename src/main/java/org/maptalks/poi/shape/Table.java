@@ -18,7 +18,9 @@ public class Table extends Shape {
 
     private Double[] rowHeights = null;
 
-    public Table(Double left, Double top, Double width, Double height, String[][] rows, TextBoxSymbol[][] symbols, Double[] rowHeights) {
+    private Double[] colWidths = null;
+
+    public Table(Double left, Double top, Double width, Double height, String[][] rows, TextBoxSymbol[][] symbols, Double[] rowHeights, Double[] colWidths) {
         this.left = left;
         this.top = top;
         this.width = width;
@@ -26,6 +28,7 @@ public class Table extends Shape {
         this.rows = rows;
         this.symbols = symbols;
         this.rowHeights = rowHeights;
+        this.colWidths = colWidths;
     }
 
     public XSLFTable convertTo(XSLFTable table) {
@@ -37,6 +40,9 @@ public class Table extends Shape {
             TextBoxSymbol[] rowSymbols = this.symbols[i];
             double rowHeight = this.rowHeights[i];
             this.addRow(table, row, rowSymbols, rowHeight);
+        }
+        for (int j = 0; j < colWidths.length; j++) {
+            table.setColumnWidth(j, colWidths[j]);
         }
         return table;
     }
