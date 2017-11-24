@@ -1,8 +1,6 @@
 package org.maptalks.poi.shape;
 
-import org.apache.poi.sl.usermodel.PaintStyle;
-import org.apache.poi.sl.usermodel.ShapeType;
-import org.apache.poi.sl.usermodel.TextParagraph;
+import org.apache.poi.sl.usermodel.*;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xslf.usermodel.XSLFShapeContainer;
 import org.apache.poi.xslf.usermodel.XSLFTextBox;
@@ -42,9 +40,18 @@ public class TextBox extends Shape {
         textBox.setAnchor(textAnchor);
 
         textBox.setShapeType(this.textBoxSymbol.getBoxType());
-        textBox.setLineColor(this.textBoxSymbol.getLineColor());
-//        textBox.setLineWidth(this.textBoxSymbol.getLineWidth());
-        textBox.setFillColor(this.textBoxSymbol.getFillColor());
+        if(this.textBoxSymbol.getLineOpacity().doubleValue() > 0) {
+            textBox.setLineColor(this.textBoxSymbol.getLineColor());
+        } else {
+            textBox.setLineColor(null);
+        }
+        textBox.setLineWidth(this.textBoxSymbol.getLineWidth());
+
+        if(this.textBoxSymbol.getFillOpacity().doubleValue() > 0) {
+            textBox.setFillColor(this.textBoxSymbol.getFillColor());
+        } else {
+            textBox.setFillColor(null);
+        }
         textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
         textBox.setInsets(this.textBoxSymbol.getInsetPadding());
 

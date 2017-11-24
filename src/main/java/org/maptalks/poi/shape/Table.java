@@ -59,6 +59,16 @@ public class Table extends Shape {
             cell.setBorderColor(TableCell.BorderEdge.bottom, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.right, symbol.getLineColor());
             cell.setFillColor(symbol.getFillColor());
+            if(symbol.getLineOpacity().doubleValue() > 0) {
+                cell.setLineColor(symbol.getLineColor());
+            } else {
+                cell.setLineColor(null);
+            }
+            if(symbol.getFillOpacity().doubleValue() > 0) {
+                cell.setFillColor(symbol.getFillColor());
+            } else {
+                cell.setFillColor(null);
+            }
             cell.clearText();
             cell.setWordWrap(symbol.isWordWrap());
             cell.setInsets(symbol.getInsetPadding());

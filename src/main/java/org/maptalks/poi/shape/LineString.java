@@ -1,6 +1,5 @@
 package org.maptalks.poi.shape;
 
-import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFConnectorShape;
 import org.apache.poi.xslf.usermodel.XSLFSlide;

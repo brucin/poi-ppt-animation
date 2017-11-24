@@ -20,7 +20,13 @@ public class TextBoxSymbol {
 
     private Color lineColor = new Color(205,205,205);
 
+    private Double lineOpacity = 1.0;
+
+    private Double lineWidth = 1.0;
+
     private Color fillColor = new Color(105,155,252);
+
+    private Double fillOpacity = 1.0;
 
     private Color fontColor = new Color(0,0,0);
 
@@ -43,6 +49,8 @@ public class TextBoxSymbol {
     private String textStyle = "normal";
 
     private ShapeType boxType = ShapeType.RECT;
+
+    private Double textOpacity = 1.0;
 
     public TextBoxSymbol() {
     }
@@ -68,6 +76,22 @@ public class TextBoxSymbol {
 
     public void setFontColor(Color fontColor) {
         this.fontColor = fontColor;
+    }
+
+    public void setLineOpacity(Double lineOpacity) {
+        this.lineOpacity = lineOpacity;
+    }
+
+    public void setFillOpacity(Double fillOpacity) {
+        this.fillOpacity = fillOpacity;
+    }
+
+    public void setTextOpacity(Double textOpacity) {
+        this.textOpacity = textOpacity;
+    }
+
+    public void setLineWidth(Double lineWidth) {
+        this.lineWidth = lineWidth;
     }
 
     public void setVertical(String vertical) {
@@ -120,6 +144,22 @@ public class TextBoxSymbol {
 
     public Color getFillColor() {
         return fillColor;
+    }
+
+    public Double getLineOpacity() {
+        return lineOpacity;
+    }
+
+    public Double getFillOpacity() {
+        return fillOpacity;
+    }
+
+    public Double getTextOpacity() {
+        return textOpacity;
+    }
+
+    public Double getLineWidth() {
+        return lineWidth;
     }
 
     public Color getFontColor() {
@@ -238,7 +278,10 @@ public class TextBoxSymbol {
     public String toString() {
         return "TextBoxSymbol{" +
                 "lineColor=" + lineColor +
+                ", lineOpacity=" + lineOpacity +
+                ", lineWidth=" + lineWidth +
                 ", fillColor=" + fillColor +
+                ", fillOpacity=" + fillOpacity +
                 ", fontColor=" + fontColor +
                 ", vertical='" + vertical + '\'' +
                 ", horizontal='" + horizontal + '\'' +
@@ -250,6 +293,7 @@ public class TextBoxSymbol {
                 ", textWeight='" + textWeight + '\'' +
                 ", textStyle='" + textStyle + '\'' +
                 ", boxType=" + boxType +
+                ", textOpacity=" + textOpacity +
                 '}';
     }
 }
