@@ -67,25 +67,25 @@ public class TestLineString {
 
         // add lineString
 //        XSLFConnectorShape lineShape = slide.createConnector();
-//        XSLFFreeformShape lineString = slide.createFreeform();
-//        lineString.setAnchor(new Rectangle2D.Double(200, 150, 1000, 600));
-//        Double[][] points = {
-//                {10.0, 200.0},
-//                {380.0, 20.0},
-//                {700.0, 210.0},
-//                {900.0, 300.0},
-//                {536.0, 100.0},
-//                {10.0, 10.0},
-//                {980.0, 160.0},
-//                {213.0, 600.0},
-//                {760.0, 560.0},
-//                {310.0, 150.0}
-//        };
-//        lineString.setPath(this.getPath(points));
-//        lineString.setLineColor(Color.BLUE);
-//        lineString.setFillColor(Color.CYAN);
-//        lineString.setLineWidth(6.0);
-//        lineString.setStrokeStyle(StrokeStyle.LineDash.DOT);
+        XSLFFreeformShape lineString = slide.createFreeform();
+        lineString.setAnchor(new Rectangle2D.Double(200, 150, 1000, 600));
+        Double[][] points = {
+                {10.0, 200.0},
+                {380.0, 20.0},
+                {700.0, 210.0},
+                {900.0, 300.0},
+                {536.0, 100.0},
+                {10.0, 10.0},
+                {980.0, 160.0},
+                {213.0, 600.0},
+                {760.0, 560.0},
+                {310.0, 150.0}
+        };
+        lineString.setPath(this.getPath(points));
+        lineString.setLineColor(Color.BLUE);
+        lineString.setFillColor(Color.CYAN);
+        lineString.setLineWidth(6.0);
+        lineString.setStrokeStyle(StrokeStyle.LineDash.DOT);
 
 
 //        XSLFFreeformShape shape1 = slide.createFreeform();
@@ -112,6 +112,7 @@ public class TestLineString {
                 if (index == length -1) {
                     path.closePath();
                 }
+                index ++;
             }
         }
         return path;

@@ -52,18 +52,16 @@ public class Table extends Shape {
         row.setHeight(rowHeight);
         for (int i = 0; i < array.length; i++) {
             String content = array[i];
+            if(content == null || content.toLowerCase().equals("null")) {
+                content = "";
+            }
             TextBoxSymbol symbol = rowSymbols[i];
             XSLFTableCell cell = row.addCell();
             cell.setBorderColor(TableCell.BorderEdge.top, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.left, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.bottom, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.right, symbol.getLineColor());
-            cell.setFillColor(symbol.getFillColor());
-            if(symbol.getLineOpacity().doubleValue() > 0) {
-                cell.setLineColor(symbol.getLineColor());
-            } else {
-                cell.setLineColor(null);
-            }
+//            cell.setFillColor(symbol.getFillColor());
             if(symbol.getFillOpacity().doubleValue() > 0) {
                 cell.setFillColor(symbol.getFillColor());
             } else {
@@ -77,7 +75,7 @@ public class Table extends Shape {
             TextParagraph textParagraph = cell.addNewTextParagraph();
             textParagraph.setTextAlign(symbol.getTextAlign());
             //@Todo 猜测powerpoint将该值理解为1倍行高
-//            textParagraph.setLineSpacing(symbol.getLineSpacing());
+            textParagraph.setLineSpacing(symbol.getLineSpacing());
 
             XSLFTextRun text = cell.setText(content);
             text.setFontColor(symbol.getFontColor());

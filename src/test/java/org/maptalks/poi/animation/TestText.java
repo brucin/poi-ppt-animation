@@ -78,7 +78,7 @@ public class TestText {
 
         System.out.println(symbol.toString());
 
-        XSLFTextBox textBox = new TextBox("文本文", 14.0, 41.0, 160.0, 60.0, symbol)
+        XSLFTextBox textBox = new TextBox(null, 14.0, 41.0, 160.0, 60.0, symbol)
                 .convertTo(slide.createTextBox());
 
         String savePath = this.getClass().getResource("/ppt").getPath();

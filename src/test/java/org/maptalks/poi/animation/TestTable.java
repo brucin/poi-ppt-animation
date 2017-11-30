@@ -66,8 +66,8 @@ public class TestTable {
         //add table
         String[][] rows = {{"序号","表头","表头","表头"},
                 {"1","A","B","C"},
-                {"2","甲","乙","丙"},
-                {"3","测试","测试","测试"}
+                {"2","甲",null,"丙"},
+                {"3","测试","null","测试"}
         };
         TextBoxSymbol defaultSymbol = new TextBoxSymbol();
         TextBoxSymbol[][] symbols = {{defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},

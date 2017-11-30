@@ -34,6 +34,13 @@ public class TextBox extends Shape {
         this.textBoxSymbol = symbol;
     }
 
+    public String getText() {
+        if(text == null || text.toLowerCase().equals("null")) {
+            text = "";
+        }
+        return text;
+    }
+
     public XSLFTextBox convertTo(XSLFTextBox textBox) {
         if(textBox == null) return null;
         Rectangle2D textAnchor = new Rectangle2D.Double(this.left, this.top, this.width, this.height);
@@ -63,7 +70,7 @@ public class TextBox extends Shape {
             textParagraph.setTextAlign(this.textBoxSymbol.getTextAlign());
         }
         textParagraph.setLineSpacing(this.textBoxSymbol.getLineSpacing());
-        XSLFTextRun text = textBox.setText(this.text);
+        XSLFTextRun text = textBox.setText(this.getText());
         text.setFontColor(this.textBoxSymbol.getFontColor());
         text.setFontSize(this.textBoxSymbol.getFontSize());
         text.setFontFamily(this.textBoxSymbol.getFontFamily());
