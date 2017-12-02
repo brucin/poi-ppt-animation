@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.maptalks.poi</groupId>
   <artifactId>poi-ppt-animation</artifactId>
-  <version>0.0.26</version>
+  <version>0.0.27</version>
 
   <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <poi.version>3.14-beta2</poi.version>
+        <poi.version>3.16</poi.version>
         <jdk.version>1.5</jdk.version>
   </properties>
 
@@ -39,23 +39,6 @@
       <artifactId>jcl-over-slf4j</artifactId>
       <version>1.7.5</version>
     </dependency>
-      <!--
-    <dependency>
-      <groupId>net.hanjava.svg</groupId>
-      <artifactId>svg2emf</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache</groupId>
-      <artifactId>batik</artifactId>
-      <version>1.7</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.batik</groupId>
-      <artifactId>batik-codc</artifactId>
-      <version>1.7</version>
-    </dependency>
-    -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>

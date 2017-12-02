@@ -19,9 +19,8 @@ package org.maptalks.poi.animation;
 import org.apache.poi.sl.usermodel.PictureData;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.Table;
-import org.maptalks.poi.shape.TextBox;
-import org.maptalks.poi.shape.symbol.TextBoxSymbol;
+import org.maptalks.poi.shape.Polygon;
+import org.maptalks.poi.shape.symbol.StrokeSymbol;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -30,12 +29,12 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
- * Created by wangjun on 16/2/18.
+ * add by brucin 2017/11/14
  */
-public class TestText {
+public class TestRectangle {
 
     @Test
-    public void test() throws Exception {
+    public void testRectangle() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -63,26 +62,24 @@ public class TestText {
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
         out.close();
 
-        //add label
-        TextBoxSymbol symbol = new TextBoxSymbol();
-        symbol.setWordWrap(true);
-        symbol.setLineColor(null);
-        symbol.setTextWeight("bold");
-        symbol.setTextStyle("italic");
-        symbol.setHorizontal("center");
-        symbol.setVertical("middle");
-        symbol.setFillOpacity(0.0);
-        Double[] padding = {3.0, 6.0, 9.0, 16.0};
-        symbol.setPadding(padding);
-        symbol.setLineSpacing(2.0);
+        // add rectangle
+        Double[][] points = {
+                {10.0, 10.0},
+                {200.0, 10.0},
+                {200.0, 200.0},
+                {10.0, 200.0}
+        };
+        StrokeSymbol symbol = new StrokeSymbol();
 
-        System.out.println(symbol.toString());
+        symbol.setLineColor(Color.BLUE);
+        symbol.setLineOpacity(0.6);
+        symbol.setLineWidth(1.0);
+        symbol.setFillColor(Color.CYAN);
+        symbol.setFillOpacity(0.2);
 
-        XSLFTextBox textBox = new TextBox("", 14.0, 41.0, 160.0, 60.0, symbol)
-                .convertTo(slide.createTextBox());
-
+        XSLFFreeformShape rectangle = new Polygon(points, symbol).convertTo(slide.createFreeform());
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/vector_text.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/vector_rectangle.pptx");
         pptx.write(output);
         output.close();
     }

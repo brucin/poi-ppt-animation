@@ -19,7 +19,6 @@ package org.maptalks.poi.animation;
 import org.apache.poi.sl.usermodel.PictureData;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.Table;
 import org.maptalks.poi.shape.TextBox;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
@@ -28,14 +27,16 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestText {
+public class TestMutliRowText {
 
     @Test
-    public void test() throws Exception {
+    public void testMutliRowText() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -66,11 +67,11 @@ public class TestText {
         //add label
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
-        symbol.setLineColor(null);
+        symbol.setLineColor(new Color(205,205,205));
         symbol.setTextWeight("bold");
         symbol.setTextStyle("italic");
-        symbol.setHorizontal("center");
-        symbol.setVertical("middle");
+        symbol.setHorizontal("right");
+        symbol.setVertical("bottom");
         symbol.setFillOpacity(0.0);
         Double[] padding = {3.0, 6.0, 9.0, 16.0};
         symbol.setPadding(padding);
@@ -78,11 +79,16 @@ public class TestText {
 
         System.out.println(symbol.toString());
 
-        XSLFTextBox textBox = new TextBox("", 14.0, 41.0, 160.0, 60.0, symbol)
+        List<String> rows = new ArrayList<String>();
+        rows.add("第一行：测试文本。");
+        rows.add("第二行：测试。");
+        rows.add("Third: 3.");
+
+        XSLFTextBox textBox = new TextBox(rows, 14.0, 41.0, 160.0, 160.0, symbol)
                 .convertTo(slide.createTextBox());
 
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/vector_text.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/vector_mutli_row_text.pptx");
         pptx.write(output);
         output.close();
     }

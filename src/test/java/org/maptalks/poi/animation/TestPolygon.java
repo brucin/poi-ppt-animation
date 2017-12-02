@@ -16,31 +16,26 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import org.apache.poi.sl.draw.geom.CustomGeometry;
-import org.apache.poi.sl.usermodel.LineDecoration;
 import org.apache.poi.sl.usermodel.PictureData;
-import org.apache.poi.sl.usermodel.Placeholder;
 import org.apache.poi.sl.usermodel.StrokeStyle;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.LineString;
-import org.maptalks.poi.shape.TextBox;
 import org.maptalks.poi.shape.symbol.StrokeSymbol;
-import org.maptalks.poi.shape.symbol.TextBoxSymbol;
+import org.maptalks.poi.shape.Polygon;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
  * add by brucin 2017/11/14
  */
-public class TestLineString {
+public class TestPolygon {
 
     @Test
-    public void testLineString() throws Exception {
+    public void testPoylgon() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -68,7 +63,7 @@ public class TestLineString {
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
         out.close();
 
-        // add lineString
+        // add polygon
         Double[][] points = {
                 {10.0, 200.0},
 //                {380.0, 20.0},
@@ -83,20 +78,20 @@ public class TestLineString {
         };
         StrokeSymbol symbol = new StrokeSymbol();
 
-        symbol.setLineDash(StrokeStyle.LineDash.DASH);
-        symbol.setHeadDecoration(LineDecoration.DecorationShape.ARROW);
-        symbol.setHeadWidth(LineDecoration.DecorationSize.LARGE);
-        symbol.setHeadLength(LineDecoration.DecorationSize.LARGE);
-        symbol.setTailDecoration(LineDecoration.DecorationShape.ARROW);
-        symbol.setTailWidth(LineDecoration.DecorationSize.LARGE);
+//        symbol.setLineDash(StrokeStyle.LineDash.DASH);
+//        symbol.setHeadDecoration(LineDecoration.DecorationShape.ARROW);
+//        symbol.setHeadWidth(LineDecoration.DecorationSize.LARGE);
+//        symbol.setHeadLength(LineDecoration.DecorationSize.LARGE);
+//        symbol.setTailDecoration(LineDecoration.DecorationShape.ARROW);
+//        symbol.setTailWidth(LineDecoration.DecorationSize.LARGE);
         symbol.setLineColor(Color.BLUE);
-//        symbol.setFillColor(Color.CYAN);
+        symbol.setFillColor(Color.CYAN);
         symbol.setLineWidth(16.0);
 
-        XSLFFreeformShape line = new LineString(points, symbol).convertTo(slide.createFreeform());
+        XSLFFreeformShape polygon = new Polygon(points, symbol).convertTo(slide.createFreeform());
 
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/lineString.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/vector_polygon.pptx");
         pptx.write(output);
         output.close();
     }

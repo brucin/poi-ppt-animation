@@ -2,12 +2,14 @@ package org.maptalks.poi.shape;
 
 import org.apache.poi.sl.usermodel.*;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.xslf.usermodel.XSLFShapeContainer;
 import org.apache.poi.xslf.usermodel.XSLFTextBox;
+import org.apache.poi.xslf.usermodel.XSLFTextParagraph;
 import org.apache.poi.xslf.usermodel.XSLFTextRun;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wangjun on 2017/7/20.
@@ -15,6 +17,8 @@ import java.awt.geom.Rectangle2D;
 public class TextBox extends Shape {
 
     private String text;
+
+    private List<String> rows = new ArrayList<String>();
 
     private TextBoxSymbol textBoxSymbol = new TextBoxSymbol();
 
@@ -34,12 +38,27 @@ public class TextBox extends Shape {
         this.textBoxSymbol = symbol;
     }
 
+    public TextBox(List<String> rows, Double left, Double top, Double width, Double height, TextBoxSymbol symbol) {
+        this.rows = rows;
+        this.top = top;
+        this.left = left;
+        this.width = width;
+        this.height = height;
+        this.textBoxSymbol = symbol;
+    }
+
     public String getText() {
+        return this.whenTextIsNull(this.text);
+    }
+
+    public String whenTextIsNull(String text) {
         if(text == null || text.toLowerCase().equals("null")) {
             text = "";
         }
         return text;
     }
+
+
 
     public XSLFTextBox convertTo(XSLFTextBox textBox) {
         if(textBox == null) return null;
@@ -61,21 +80,41 @@ public class TextBox extends Shape {
         }
         textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
         textBox.setInsets(this.textBoxSymbol.getInsetPadding());
-
         textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
-        TextParagraph textParagraph = textBox.addNewTextParagraph();
-        if(this.textBoxSymbol.getHorizontalAlignment().equals(HorizontalAlignment.CENTER)) {
-            textBox.setHorizontalCentered(true);
-        } else {
-            textParagraph.setTextAlign(this.textBoxSymbol.getTextAlign());
-        }
-        textParagraph.setLineSpacing(this.textBoxSymbol.getLineSpacing());
-        XSLFTextRun text = textBox.setText(this.getText());
-        text.setFontColor(this.textBoxSymbol.getFontColor());
-        text.setFontSize(this.textBoxSymbol.getFontSize());
-        text.setFontFamily(this.textBoxSymbol.getFontFamily());
-        text.setBold(this.textBoxSymbol.isBold());
-        text.setItalic(this.textBoxSymbol.isItalic());
+
+        XSLFTextParagraph textParagraph = textBox.addNewTextParagraph();
+//        if(this.textBoxSymbol.getHorizontalAlignment().equals(HorizontalAlignment.CENTER)) {
+//            textBox.setHorizontalCentered(true);
+//        } else {
+//            textParagraph.setTextAlign(this.textBoxSymbol.getTextAlign());
+//        }
+        textParagraph.setTextAlign(this.textBoxSymbol.getTextAlign());
+//        textParagraph.setLineSpacing(this.textBoxSymbol.getLineSpacing());
+        this.appendTexts(textParagraph);
         return textBox;
     }
+
+    private void appendTexts(XSLFTextParagraph textParagraph) {
+        if(this.rows.size() > 0) {
+            for (int i = 0; i < this.rows.size(); i++) {
+                String text = this.rows.get(i);
+                this.appendText(textParagraph, this.whenTextIsNull(text));
+            }
+        } else {
+            this.appendText(textParagraph, this.getText());
+        }
+    }
+
+    private void appendText(XSLFTextParagraph textParagraph, String text) {
+        XSLFTextRun textRun = textParagraph.addNewTextRun();
+        textRun.setText(text);
+        textRun.setFontColor(this.textBoxSymbol.getFontColor());
+        textRun.setFontSize(this.textBoxSymbol.getFontSize());
+        textRun.setFontFamily(this.textBoxSymbol.getFontFamily());
+        textRun.setBold(this.textBoxSymbol.isBold());
+        textRun.setItalic(this.textBoxSymbol.isItalic());
+        textParagraph.addLineBreak();
+    }
+
+
 }

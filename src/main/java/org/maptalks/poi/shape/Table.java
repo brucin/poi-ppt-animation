@@ -74,8 +74,8 @@ public class Table extends Shape {
             cell.setVerticalAlignment(symbol.getVerticalAlignment());
             TextParagraph textParagraph = cell.addNewTextParagraph();
             textParagraph.setTextAlign(symbol.getTextAlign());
-            //@Todo 猜测powerpoint将该值理解为1倍行高
-            textParagraph.setLineSpacing(symbol.getLineSpacing());
+            //@Todo 猜测PowerPoint将该值理解为1倍行高
+//            textParagraph.setLineSpacing(symbol.getLineSpacing());
 
             XSLFTextRun text = cell.setText(content);
             text.setFontColor(symbol.getFontColor());
