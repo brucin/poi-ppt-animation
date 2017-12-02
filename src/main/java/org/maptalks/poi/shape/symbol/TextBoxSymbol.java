@@ -139,11 +139,21 @@ public class TextBoxSymbol {
     }
 
     public Color getLineColor() {
-        return lineColor;
+        if(this.lineColor == null) return null;
+        float[] rgbs = this.lineColor.getRGBColorComponents(null);
+        if(this.lineOpacity > 0) {
+            return new Color(rgbs[0], rgbs[1], rgbs[2], this.lineOpacity.floatValue());
+        }
+        return null;
     }
 
     public Color getFillColor() {
-        return fillColor;
+        if(this.fillColor == null) return null;
+        float[] rgbs = this.fillColor.getRGBColorComponents(null);
+        if(this.fillOpacity > 0) {
+            return new Color(rgbs[0], rgbs[1], rgbs[2], this.fillOpacity.floatValue());
+        }
+        return null;
     }
 
     public Double getLineOpacity() {
@@ -163,7 +173,12 @@ public class TextBoxSymbol {
     }
 
     public Color getFontColor() {
-        return fontColor;
+        if(this.fontColor == null) return null;
+        float[] rgbs = this.fontColor.getRGBColorComponents(null);
+        if(this.textOpacity > 0) {
+            return new Color(rgbs[0], rgbs[1], rgbs[2], this.textOpacity.floatValue());
+        }
+        return null;
     }
 
     public String getVertical() {

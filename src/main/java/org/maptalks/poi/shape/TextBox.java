@@ -66,18 +66,10 @@ public class TextBox extends Shape {
         textBox.setAnchor(textAnchor);
 
         textBox.setShapeType(this.textBoxSymbol.getBoxType());
-        if(this.textBoxSymbol.getLineOpacity().doubleValue() > 0) {
-            textBox.setLineColor(this.textBoxSymbol.getLineColor());
-        } else {
-            textBox.setLineColor(null);
-        }
+        textBox.setLineColor(this.textBoxSymbol.getLineColor());
         textBox.setLineWidth(this.textBoxSymbol.getLineWidth());
 
-        if(this.textBoxSymbol.getFillOpacity().doubleValue() > 0) {
-            textBox.setFillColor(this.textBoxSymbol.getFillColor());
-        } else {
-            textBox.setFillColor(null);
-        }
+        textBox.setFillColor(this.textBoxSymbol.getFillColor());
         textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
         textBox.setInsets(this.textBoxSymbol.getInsetPadding());
         textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());

@@ -90,6 +90,7 @@ public class StrokeSymbol {
     }
 
     public Color getLineColor() {
+        if(this.lineColor == null) return null;
         float[] rgbs = this.lineColor.getRGBColorComponents(null);
         if(this.lineOpacity > 0) {
             return new Color(rgbs[0], rgbs[1], rgbs[2], this.lineOpacity.floatValue());
@@ -138,6 +139,7 @@ public class StrokeSymbol {
     }
 
     public Color getFillColor() {
+        if(this.fillColor == null) return null;
         float[] rgbs = this.fillColor.getRGBColorComponents(null);
         if(this.fillOpacity > 0) {
             return new Color(rgbs[0], rgbs[1], rgbs[2], this.fillOpacity.floatValue());

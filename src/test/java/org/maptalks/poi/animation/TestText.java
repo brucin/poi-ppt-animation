@@ -72,13 +72,15 @@ public class TestText {
         symbol.setHorizontal("center");
         symbol.setVertical("middle");
         symbol.setFillOpacity(0.0);
+        symbol.setTextOpacity(0.5);
+        symbol.setFontSize(30.0);
         Double[] padding = {3.0, 6.0, 9.0, 16.0};
         symbol.setPadding(padding);
         symbol.setLineSpacing(2.0);
 
         System.out.println(symbol.toString());
 
-        XSLFTextBox textBox = new TextBox("", 14.0, 41.0, 160.0, 60.0, symbol)
+        XSLFTextBox textBox = new TextBox("123456789", 14.0, 41.0, 160.0, 60.0, symbol)
                 .convertTo(slide.createTextBox());
 
         String savePath = this.getClass().getResource("/ppt").getPath();
