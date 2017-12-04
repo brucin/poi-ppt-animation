@@ -16,10 +16,9 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import org.apache.poi.sl.usermodel.*;
+import org.apache.poi.sl.usermodel.PictureData;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.*;
 import org.maptalks.poi.shape.TextBox;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
@@ -32,10 +31,10 @@ import java.io.*;
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestTextAndTable {
-    
+public class TestTextLineSpacing {
+
     @Test
-    public void test() throws Exception {
+    public void testTextLineSpacing() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -57,7 +56,7 @@ public class TestTextAndTable {
         }
         in.close();
         byte[] content = out.toByteArray();
-        XSLFPictureData pictureData = pptx.addPicture(content, org.apache.poi.sl.usermodel.PictureData.PictureType.PNG);
+        XSLFPictureData pictureData = pptx.addPicture(content, PictureData.PictureType.PNG);
         XSLFPictureShape picShape = slide.createPicture(pictureData);
         picShape.setLineWidth(0);
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
@@ -66,33 +65,28 @@ public class TestTextAndTable {
         //add label
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
-        symbol.setTextWeight("bold");
-        symbol.setTextStyle("italic");
-        Double[] padding = {3.0, 6.0, 9.0, 16.0};
+        symbol.setLineColor(new Color(204, 204, 204));
+        symbol.setLineOpacity(1.0);
+        symbol.setTextWeight("normal");
+        symbol.setTextStyle("normal");
+        symbol.setHorizontal("left");
+        symbol.setVertical("middle");
+        symbol.setFillColor(new Color(47, 55, 62));
+        symbol.setFillOpacity(1.0);
+        symbol.setFontColor(Color.WHITE);
+        symbol.setTextOpacity(1.0);
+        symbol.setFontSize(14.0);
+        Double[] padding = {12.0, 8.0};
         symbol.setPadding(padding);
-        symbol.setLineSpacing(2.0);
+        symbol.setLineSpacing(1.0);
 
-        XSLFTextBox textBox = new TextBox("文本文本文本", 14.0, 41.0, 60.0, 60.0, symbol)
+        System.out.println(symbol.toString());
+        String text = new String("交通变化：嘉闵高架建成，分流莘松路车流，\n                  拉动北部嘉定、松江板块至南部闵行地区。\n人口变化：无变化。\n商业变化：\n       2016.9亚繁亚乐城开业\n       2017.12彩生活时代广场开业。\n商圈结论：商圈稳定，容量1家。\n开发策略：结合社区内最大聚客点：彩生活时代广场布局。\n资产策略：莘松店---单一卖场，聚客能力弱，不在商圈中心，建议移店。");
+        XSLFTextBox textBox = new TextBox(text, 72.5, 54.5, 477.0, 203.0, symbol)
                 .convertTo(slide.createTextBox());
 
-        //add table
-        String[][] rows = {{"序号","表头","表头","表头"},
-                {"1","A","B","C"},
-                {"2","甲","乙","丙"},
-                {"3","测试","测试","测试"}
-        };
-        TextBoxSymbol defaultSymbol = new TextBoxSymbol();
-
-        TextBoxSymbol[][] symbols = {{defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
-        };
-        Double[] rowHeights = {16.0,16.0,16.0,16.0};
-        Double[] colWidths = {30.0,40.0,50.0,60.0};
-        XSLFTable table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights, colWidths).convertTo(slide.createTable());
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/text_line_spacing.pptx");
         pptx.write(output);
         output.close();
     }

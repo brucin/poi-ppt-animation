@@ -16,11 +16,11 @@
 ==================================================================== */
 package org.maptalks.poi.animation;
 
-import org.apache.poi.sl.usermodel.*;
+import org.apache.poi.sl.usermodel.PictureData;
+import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.*;
-import org.maptalks.poi.shape.TextBox;
+import org.maptalks.poi.shape.Table;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
 import javax.imageio.ImageIO;
@@ -32,10 +32,10 @@ import java.io.*;
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestTextAndTable {
-    
+public class TestTableWithCustomSymbol {
+
     @Test
-    public void test() throws Exception {
+    public void testCustomTable() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -57,42 +57,48 @@ public class TestTextAndTable {
         }
         in.close();
         byte[] content = out.toByteArray();
-        XSLFPictureData pictureData = pptx.addPicture(content, org.apache.poi.sl.usermodel.PictureData.PictureType.PNG);
+        XSLFPictureData pictureData = pptx.addPicture(content, PictureData.PictureType.PNG);
         XSLFPictureShape picShape = slide.createPicture(pictureData);
         picShape.setLineWidth(0);
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
         out.close();
 
-        //add label
-        TextBoxSymbol symbol = new TextBoxSymbol();
-        symbol.setWordWrap(true);
-        symbol.setTextWeight("bold");
-        symbol.setTextStyle("italic");
-        Double[] padding = {3.0, 6.0, 9.0, 16.0};
-        symbol.setPadding(padding);
-        symbol.setLineSpacing(2.0);
-
-        XSLFTextBox textBox = new TextBox("文本文本文本", 14.0, 41.0, 60.0, 60.0, symbol)
-                .convertTo(slide.createTextBox());
-
         //add table
         String[][] rows = {{"序号","表头","表头","表头"},
                 {"1","A","B","C"},
-                {"2","甲","乙","丙"},
-                {"3","测试","测试","测试"}
+                {"2","甲",null,"丙"},
+                {"3","测试","null","测试"}
         };
-        TextBoxSymbol defaultSymbol = new TextBoxSymbol();
+        TextBoxSymbol symbol = new TextBoxSymbol();
+        symbol.setWordWrap(true);
+        symbol.setLineColor(Color.black);
+        symbol.setLineOpacity(0.0);
+        symbol.setLineWidth(1.0);
+        symbol.setFillColor(Color.WHITE);
+        symbol.setFillOpacity(0.0);
 
-        TextBoxSymbol[][] symbols = {{defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol},
-                {defaultSymbol,defaultSymbol,defaultSymbol,defaultSymbol}
+        symbol.setTextWeight("normal");
+        symbol.setTextStyle("normal");
+        symbol.setHorizontal("middle");
+        symbol.setVertical("middle");
+        symbol.setFontColor(Color.BLUE);
+        symbol.setTextOpacity(1.0);
+        symbol.setFontSize(14.0);
+        Double[] padding = {8.0, 2.0};
+        symbol.setPadding(padding);
+        symbol.setLineSpacing(1.0);
+//        symbol.setBoxType(ShapeType.RECT);
+
+        TextBoxSymbol[][] symbols = {{symbol,symbol,symbol,symbol},
+                {symbol,symbol,symbol,symbol},
+                {symbol,symbol,symbol,symbol},
+                {symbol,symbol,symbol,symbol}
         };
-        Double[] rowHeights = {16.0,16.0,16.0,16.0};
-        Double[] colWidths = {30.0,40.0,50.0,60.0};
-        XSLFTable table = new Table(550.0, 280.0, 300.0, 83.0, rows, symbols, rowHeights, colWidths).convertTo(slide.createTable());
+        Double[] rowHeights = {22.0, 22.0, 22.0, 22.0};
+        Double[] colWidths = {44.0, 44.0, 44.0, 44.0};
+        XSLFTable table = new Table(404.8, 221.1, 176.0, 88.0, rows, symbols, rowHeights, colWidths).convertTo(slide.createTable());
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/text_and_table.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/custom_table.pptx");
         pptx.write(output);
         output.close();
     }

@@ -5,6 +5,7 @@ import org.apache.poi.sl.usermodel.TextParagraph;
 import org.apache.poi.xslf.usermodel.*;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -63,10 +64,14 @@ public class Table extends Shape {
 
             TextBoxSymbol symbol = rowSymbols[i];
             XSLFTableCell cell = row.addCell();
-            cell.setBorderColor(TableCell.BorderEdge.top, symbol.getLineColor());
-            cell.setBorderColor(TableCell.BorderEdge.right, symbol.getLineColor());
-            cell.setBorderColor(TableCell.BorderEdge.bottom, symbol.getLineColor());
-            cell.setBorderColor(TableCell.BorderEdge.left, symbol.getLineColor());
+            Color lineColor = symbol.getLineColor();
+            if(lineColor == null) {
+
+            }
+            cell.setBorderColor(TableCell.BorderEdge.top, lineColor);
+            cell.setBorderColor(TableCell.BorderEdge.right, lineColor);
+            cell.setBorderColor(TableCell.BorderEdge.bottom, lineColor);
+            cell.setBorderColor(TableCell.BorderEdge.left, lineColor);
 
             cell.setBorderWidth(TableCell.BorderEdge.top, symbol.getLineWidth());
             cell.setBorderWidth(TableCell.BorderEdge.right, symbol.getLineWidth());
