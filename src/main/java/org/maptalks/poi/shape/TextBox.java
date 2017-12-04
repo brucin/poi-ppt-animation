@@ -1,7 +1,5 @@
 package org.maptalks.poi.shape;
 
-import org.apache.poi.sl.usermodel.*;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xslf.usermodel.XSLFTextBox;
 import org.apache.poi.xslf.usermodel.XSLFTextParagraph;
 import org.apache.poi.xslf.usermodel.XSLFTextRun;

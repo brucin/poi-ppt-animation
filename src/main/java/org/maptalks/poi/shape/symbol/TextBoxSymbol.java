@@ -140,20 +140,30 @@ public class TextBoxSymbol {
 
 
     public Color getLineColor() {
-        if(this.lineColor  == null) this.lineColor = Color.white;
+        if(this.lineColor  == null) return null;//this.lineColor = Color.white;
         float[] rgbs = this.lineColor.getRGBColorComponents(null);
         if(this.lineOpacity > 0) {
             return new Color(rgbs[0], rgbs[1], rgbs[2], this.lineOpacity.floatValue());
         }
+        return null;
+    }
+
+    public Color getOriginalLineColor() {
+        if(this.lineColor  == null) return Color.white;
         return this.lineColor;
     }
 
     public Color getFillColor() {
-        if(this.fillColor == null) this.fillColor = Color.white;
+        if(this.fillColor == null) return null;//this.fillColor = Color.white;
         float[] rgbs = this.fillColor.getRGBColorComponents(null);
         if(this.fillOpacity > 0) {
             return new Color(rgbs[0], rgbs[1], rgbs[2], this.fillOpacity.floatValue());
         }
+        return null;
+    }
+
+    public Color getOriginalFillColor() {
+        if(this.fillColor  == null) return Color.white;
         return this.fillColor;
     }
 
@@ -174,11 +184,16 @@ public class TextBoxSymbol {
     }
 
     public Color getFontColor() {
-        if(this.fontColor == null) this.fontColor = Color.white;
+        if(this.fontColor == null) return null;//this.fontColor = Color.white;
         float[] rgbs = this.fontColor.getRGBColorComponents(null);
         if(this.textOpacity > 0) {
             return new Color(rgbs[0], rgbs[1], rgbs[2], this.textOpacity.floatValue());
         }
+        return null;
+    }
+
+    public Color getOriginalFontColor() {
+        if(this.fontColor  == null) return Color.white;
         return this.fontColor;
     }
 

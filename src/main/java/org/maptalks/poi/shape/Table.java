@@ -64,10 +64,8 @@ public class Table extends Shape {
 
             TextBoxSymbol symbol = rowSymbols[i];
             XSLFTableCell cell = row.addCell();
-            Color lineColor = symbol.getLineColor();
-            if(lineColor == null) {
+            Color lineColor = symbol.getOriginalLineColor();
 
-            }
             cell.setBorderColor(TableCell.BorderEdge.top, lineColor);
             cell.setBorderColor(TableCell.BorderEdge.right, lineColor);
             cell.setBorderColor(TableCell.BorderEdge.bottom, lineColor);
