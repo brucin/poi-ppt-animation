@@ -58,8 +58,6 @@ public class TextBox extends Shape {
         return text;
     }
 
-
-
     public XSLFTextBox convertTo(XSLFTextBox textBox) {
         if(textBox == null) return null;
         Rectangle2D textAnchor = new Rectangle2D.Double(this.left, this.top, this.width, this.height);
@@ -73,15 +71,9 @@ public class TextBox extends Shape {
         textBox.setWordWrap(this.textBoxSymbol.isWordWrap());
         textBox.setInsets(this.textBoxSymbol.getInsetPadding());
         textBox.setVerticalAlignment(this.textBoxSymbol.getVerticalAlignment());
-
+        textBox.clearText();
         XSLFTextParagraph textParagraph = textBox.addNewTextParagraph();
-//        if(this.textBoxSymbol.getHorizontalAlignment().equals(HorizontalAlignment.CENTER)) {
-//            textBox.setHorizontalCentered(true);
-//        } else {
-//            textParagraph.setTextAlign(this.textBoxSymbol.getTextAlign());
-//        }
         textParagraph.setTextAlign(this.textBoxSymbol.getTextAlign());
-//        textParagraph.setLineSpacing(this.textBoxSymbol.getLineSpacing());
         this.appendTexts(textParagraph);
         return textBox;
     }
@@ -91,6 +83,7 @@ public class TextBox extends Shape {
             for (int i = 0; i < this.rows.size(); i++) {
                 String text = this.rows.get(i);
                 this.appendText(textParagraph, this.whenTextIsNull(text));
+                textParagraph.addLineBreak();
             }
         } else {
             this.appendText(textParagraph, this.getText());
@@ -105,7 +98,6 @@ public class TextBox extends Shape {
         textRun.setFontFamily(this.textBoxSymbol.getFontFamily());
         textRun.setBold(this.textBoxSymbol.isBold());
         textRun.setItalic(this.textBoxSymbol.isItalic());
-        textParagraph.addLineBreak();
     }
 
 

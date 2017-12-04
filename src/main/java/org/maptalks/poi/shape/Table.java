@@ -47,37 +47,47 @@ public class Table extends Shape {
         return table;
     }
 
+    public String whenTextIsNull(String text) {
+        if(text == null || text.toLowerCase().equals("null")) {
+            text = "";
+        }
+        return text;
+    }
+
     private void addRow(XSLFTable table, String[] array, TextBoxSymbol[] rowSymbols, double rowHeight) {
         XSLFTableRow row = table.addRow();
         row.setHeight(rowHeight);
         for (int i = 0; i < array.length; i++) {
             String content = array[i];
-            if(content == null || content.toLowerCase().equals("null")) {
-                content = "";
-            }
+            content = whenTextIsNull(content);
+
             TextBoxSymbol symbol = rowSymbols[i];
             XSLFTableCell cell = row.addCell();
             cell.setBorderColor(TableCell.BorderEdge.top, symbol.getLineColor());
-            cell.setBorderColor(TableCell.BorderEdge.left, symbol.getLineColor());
-            cell.setBorderColor(TableCell.BorderEdge.bottom, symbol.getLineColor());
             cell.setBorderColor(TableCell.BorderEdge.right, symbol.getLineColor());
-//            cell.setFillColor(symbol.getFillColor());
-            if(symbol.getFillOpacity().doubleValue() > 0) {
-                cell.setFillColor(symbol.getFillColor());
-            } else {
-                cell.setFillColor(null);
-            }
-            cell.clearText();
+            cell.setBorderColor(TableCell.BorderEdge.bottom, symbol.getLineColor());
+            cell.setBorderColor(TableCell.BorderEdge.left, symbol.getLineColor());
+
+            cell.setBorderWidth(TableCell.BorderEdge.top, symbol.getLineWidth());
+            cell.setBorderWidth(TableCell.BorderEdge.right, symbol.getLineWidth());
+            cell.setBorderWidth(TableCell.BorderEdge.bottom, symbol.getLineWidth());
+            cell.setBorderWidth(TableCell.BorderEdge.left, symbol.getLineWidth());
+
+            cell.setLineColor(symbol.getLineColor());
+            cell.setLineWidth(symbol.getLineWidth());
+            cell.setFillColor(symbol.getFillColor());
             cell.setWordWrap(symbol.isWordWrap());
             cell.setInsets(symbol.getInsetPadding());
-
             cell.setVerticalAlignment(symbol.getVerticalAlignment());
-            TextParagraph textParagraph = cell.addNewTextParagraph();
+            cell.clearText();
+
+            XSLFTextParagraph textParagraph = cell.addNewTextParagraph();
             textParagraph.setTextAlign(symbol.getTextAlign());
             //@Todo 猜测PowerPoint将该值理解为1倍行高
 //            textParagraph.setLineSpacing(symbol.getLineSpacing());
 
-            XSLFTextRun text = cell.setText(content);
+            XSLFTextRun text = textParagraph.addNewTextRun();//cell.setText(content);
+            text.setText(content);
             text.setFontColor(symbol.getFontColor());
             text.setFontSize(symbol.getFontSize());
             text.setFontFamily(symbol.getFontFamily());
