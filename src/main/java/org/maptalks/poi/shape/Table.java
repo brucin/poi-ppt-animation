@@ -38,9 +38,11 @@ public class Table extends Shape {
         table.setAnchor(anchor);
         for (int i = 0; i < this.rows.length; i++) {
             String[] row = this.rows[i];
-            TextBoxSymbol[] rowSymbols = this.symbols[i];
-            double rowHeight = this.rowHeights[i];
-            this.addRow(table, row, rowSymbols, rowHeight);
+            if(this.symbols.length > i) {
+                TextBoxSymbol[] rowSymbols = this.symbols[i];
+                double rowHeight = this.rowHeights[i];
+                this.addRow(table, row, rowSymbols, rowHeight);
+            }
         }
         for (int j = 0; j < colWidths.length; j++) {
             table.setColumnWidth(j, colWidths[j]);
