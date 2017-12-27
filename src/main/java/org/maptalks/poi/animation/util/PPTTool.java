@@ -57,18 +57,7 @@ public class PPTTool {
         }
         for (int i = 0; i < slides.size(); i++) {
             XSLFSlide slide = slides.get(i);
-//            List<XSLFShape> shapes =  slide.getShapes();
-//            if(shapes != null) {
-//                for (int j = 0; j < shapes.size(); j++) {
-//                    XSLFShape shape = shapes.get(j);
-//                    if (shape instanceof XSLFTextShape) {
-//                        XSLFTextShape textShape = (XSLFTextShape) shape;
-//                    } else if (shape instanceof XSLFTable) {
-//                        System.out.println("HAVE TABLE......");
-//                    }
-//                }
-//            }
-            BufferedImage img = new BufferedImage(picWidth, picHeight, BufferedImage.TYPE_INT_RGB);//TYPE_INT_RGB
+            BufferedImage img = new BufferedImage(picWidth, picHeight, BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics = img.createGraphics();
             graphics.setPaint(Color.WHITE);
             graphics.fill(new Rectangle2D.Float(0, 0, picWidth, picHeight));

@@ -17,6 +17,7 @@
 package org.maptalks.poi.animation;
 
 import org.apache.poi.sl.usermodel.PictureData;
+import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
 import org.maptalks.poi.shape.Table;
@@ -67,20 +68,20 @@ public class TestText {
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
         symbol.setLineColor(null);
-        symbol.setTextWeight("bold");
-        symbol.setTextStyle("italic");
+        symbol.setTextWeight("normal");
+        symbol.setTextStyle("normal");
         symbol.setHorizontal("center");
         symbol.setVertical("middle");
-        symbol.setFillOpacity(0.0);
+        symbol.setFillOpacity(1.0);
         symbol.setTextOpacity(0.5);
-        symbol.setFontSize(30.0);
-        Double[] padding = {3.0, 6.0, 9.0, 16.0};
+        symbol.setFontSize(14.0);
+        Double[] padding = {2.0, 2.0, 2.0, 2.0};
         symbol.setPadding(padding);
         symbol.setLineSpacing(2.0);
-
+        symbol.setBoxType(ShapeType.ELLIPSE);
         System.out.println(symbol.toString());
 
-        XSLFTextBox textBox = new TextBox("123456789", 14.0, 41.0, 160.0, 60.0, symbol)
+        XSLFTextBox textBox = new TextBox("11", 14.0, 41.0, 20.0, 20.0, symbol)
                 .convertTo(slide.createTextBox());
 
         String savePath = this.getClass().getResource("/ppt").getPath();
