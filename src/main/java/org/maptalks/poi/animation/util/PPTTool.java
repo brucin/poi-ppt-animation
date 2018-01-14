@@ -57,6 +57,14 @@ public class PPTTool {
         }
         for (int i = 0; i < slides.size(); i++) {
             XSLFSlide slide = slides.get(i);
+            List<XSLFShape> shapes = slide.getShapes();
+            for (int j = 0; j < shapes.size(); j++) {
+                XSLFShape shape = shapes.get(j);
+                if(shape instanceof XSLFGroupShape) {
+                    XSLFGroupShape group = (XSLFGroupShape)shape;
+                    group.setInteriorAnchor(group.getAnchor());
+                }
+            }
             BufferedImage img = new BufferedImage(picWidth, picHeight, BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics = img.createGraphics();
             graphics.setPaint(Color.WHITE);

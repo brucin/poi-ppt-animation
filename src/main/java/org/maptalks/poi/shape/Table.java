@@ -81,6 +81,9 @@ public class Table extends Shape {
             cell.setLineColor(symbol.getLineColor());
             cell.setLineWidth(symbol.getLineWidth());
             cell.setFillColor(symbol.getFillColor());
+            cell.setInsets(symbol.getInsetPadding());
+
+
             cell.setWordWrap(symbol.isWordWrap());
             cell.setInsets(symbol.getInsetPadding());
             cell.setVerticalAlignment(symbol.getVerticalAlignment());
@@ -88,10 +91,10 @@ public class Table extends Shape {
 
             XSLFTextParagraph textParagraph = cell.addNewTextParagraph();
             textParagraph.setTextAlign(symbol.getTextAlign());
-            //@Todo 猜测PowerPoint将该值理解为1倍行高
-//            textParagraph.setLineSpacing(symbol.getLineSpacing());
+            //@Todo PowerPoint将lineSpacing处理为x倍行高(或行高的pt值)
+            textParagraph.setLineSpacing((symbol.getLineSpacing()+symbol.getFontSize())*-1);
 
-            XSLFTextRun text = textParagraph.addNewTextRun();//cell.setText(content);
+            XSLFTextRun text = textParagraph.addNewTextRun();
             text.setText(content);
             text.setFontColor(symbol.getFontColor());
             text.setFontSize(symbol.getFontSize());

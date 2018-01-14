@@ -20,7 +20,7 @@ import org.apache.poi.sl.usermodel.PictureData;
 import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.Table;
+import org.maptalks.poi.shape.TextBox;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
 import javax.imageio.ImageIO;
@@ -32,10 +32,10 @@ import java.io.*;
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestTableWithCustomSymbol {
+public class TestHaloText {
 
     @Test
-    public void testCustomTable() throws Exception {
+    public void testHaloText() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -63,50 +63,28 @@ public class TestTableWithCustomSymbol {
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
         out.close();
 
-        //add table
-        String[][] rows = {{"序号","名称","面积","说明"},
-                {
-                    "1",
-                    "柳州万达",
-                    "88000",
-                    "购物中心商业面积8.8万M2,主力店：冠超市、万达影院、大玩家、宝贝王等，配套停车位1500个。在万象城未开业前为柳州最高端的购物中心。"
-                },
-                {
-                    "2",
-                    "万象城",
-                    "113600",
-                    "购物中心商业总建面11.36万M2，配套车位1500个。主力店：沃尔玛、金逸影院、Meland儿童成长乐园、反斗城、星际传奇等。将打造成为柳州最高端的购物中心。"
-                }
-        };
+        //add label
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
-        symbol.setLineColor(Color.black);
-        symbol.setLineOpacity(0.0);
-        symbol.setLineWidth(1.0);
-        symbol.setFillColor(Color.WHITE);
-        symbol.setFillOpacity(0.0);
-
+        symbol.setLineColor(null);
         symbol.setTextWeight("normal");
         symbol.setTextStyle("normal");
-        symbol.setHorizontal("middle");
+        symbol.setHorizontal("center");
         symbol.setVertical("middle");
-        symbol.setFontColor(Color.BLUE);
-        symbol.setTextOpacity(1.0);
+        symbol.setFillOpacity(1.0);
+        symbol.setTextOpacity(0.5);
         symbol.setFontSize(14.0);
-        Double[] padding = {0.0, 0.0};
+        Double[] padding = {2.0, 2.0, 2.0, 2.0};
         symbol.setPadding(padding);
-        symbol.setLineSpacing(8.0);
-//        symbol.setBoxType(ShapeType.RECT);
+        symbol.setLineSpacing(2.0);
+        symbol.setBoxType(ShapeType.ELLIPSE);
+        System.out.println(symbol.toString());
 
-        TextBoxSymbol[][] symbols = {{symbol,symbol,symbol,symbol},
-                {symbol,symbol,symbol,symbol},
-                {symbol,symbol,symbol,symbol}
-        };
-        Double[] rowHeights = {22.0, 79.0, 100.0};
-        Double[] colWidths = {44.0, 78.0, 117.0, 328.0};
-        XSLFTable table = new Table(6.0, 5.0, 567.0, 201.0, rows, symbols, rowHeights, colWidths).convertTo(slide.createTable());
+        XSLFTextBox textBox = new TextBox("11", 14.0, 41.0, 20.0, 20.0, symbol)
+                .convertTo(slide.createTextBox());
+
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/custom_table.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/halo_text.pptx");
         pptx.write(output);
         output.close();
     }

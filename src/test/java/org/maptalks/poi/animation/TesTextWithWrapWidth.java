@@ -17,10 +17,9 @@
 package org.maptalks.poi.animation;
 
 import org.apache.poi.sl.usermodel.PictureData;
-import org.apache.poi.sl.usermodel.ShapeType;
 import org.apache.poi.xslf.usermodel.*;
 import org.junit.Test;
-import org.maptalks.poi.shape.Table;
+import org.maptalks.poi.shape.TextBox;
 import org.maptalks.poi.shape.symbol.TextBoxSymbol;
 
 import javax.imageio.ImageIO;
@@ -28,14 +27,16 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wangjun on 16/2/18.
  */
-public class TestTableWithCustomSymbol {
+public class TesTextWithWrapWidth {
 
     @Test
-    public void testCustomTable() throws Exception {
+    public void testTextWithWrapWidth() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -63,50 +64,31 @@ public class TestTableWithCustomSymbol {
         picShape.setAnchor(new Rectangle2D.Double(0, 0, width, height));
         out.close();
 
-        //add table
-        String[][] rows = {{"序号","名称","面积","说明"},
-                {
-                    "1",
-                    "柳州万达",
-                    "88000",
-                    "购物中心商业面积8.8万M2,主力店：冠超市、万达影院、大玩家、宝贝王等，配套停车位1500个。在万象城未开业前为柳州最高端的购物中心。"
-                },
-                {
-                    "2",
-                    "万象城",
-                    "113600",
-                    "购物中心商业总建面11.36万M2，配套车位1500个。主力店：沃尔玛、金逸影院、Meland儿童成长乐园、反斗城、星际传奇等。将打造成为柳州最高端的购物中心。"
-                }
-        };
+        //add label
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
-        symbol.setLineColor(Color.black);
-        symbol.setLineOpacity(0.0);
-        symbol.setLineWidth(1.0);
-        symbol.setFillColor(Color.WHITE);
-        symbol.setFillOpacity(0.0);
-
+        symbol.setLineColor(new Color(205,205,205));
         symbol.setTextWeight("normal");
         symbol.setTextStyle("normal");
         symbol.setHorizontal("middle");
         symbol.setVertical("middle");
-        symbol.setFontColor(Color.BLUE);
-        symbol.setTextOpacity(1.0);
-        symbol.setFontSize(14.0);
-        Double[] padding = {0.0, 0.0};
+        symbol.setFillOpacity(0.0);
+        Double[] padding = {0.0, 0.0, 0.0, 0.0};
         symbol.setPadding(padding);
-        symbol.setLineSpacing(8.0);
-//        symbol.setBoxType(ShapeType.RECT);
+        symbol.setLineSpacing(1.0);
 
-        TextBoxSymbol[][] symbols = {{symbol,symbol,symbol,symbol},
-                {symbol,symbol,symbol,symbol},
-                {symbol,symbol,symbol,symbol}
-        };
-        Double[] rowHeights = {22.0, 79.0, 100.0};
-        Double[] colWidths = {44.0, 78.0, 117.0, 328.0};
-        XSLFTable table = new Table(6.0, 5.0, 567.0, 201.0, rows, symbols, rowHeights, colWidths).convertTo(slide.createTable());
+        System.out.println(symbol.toString());
+
+//        List<String> rows = new ArrayList<String>();
+//        rows.add("第一行：测试文本。");
+//        rows.add("第二行：测试。");
+//        rows.add("Third: 3.");
+        String text = "B1F商业面积5040㎡：天虹超市\n1F商业面积6081㎡ ：化妆品、黄金珠宝、钟表、鞋类皮具\n2F商业面积6826㎡ ：女装\n3F商业面积7714㎡ ：男装、运动休闲\n4F商业面积6000㎡ ：万达影院、餐饮";
+        XSLFTextBox textBox = new TextBox(text, 14.0, 41.0, 250.0, 136.0, symbol)
+                .convertTo(slide.createTextBox());
+
         String savePath = this.getClass().getResource("/ppt").getPath();
-        FileOutputStream output = new FileOutputStream(savePath+"/custom_table.pptx");
+        FileOutputStream output = new FileOutputStream(savePath+"/vector_texts.pptx");
         pptx.write(output);
         output.close();
     }

@@ -36,8 +36,8 @@ public class TestSlideToImage {
 
     @Test
     public void testSlideToImage() throws Exception {
-        String pptPath = "/Users/wangjun/git/GitHub/poi-ppt-animation/src/test/resources/ppt/ppt2image/group_shape.pptx";
-        String outputPath = "/Users/wangjun/git/GitHub/poi-ppt-animation/src/test/resources/ppt/ppt2image/group/";
+        String pptPath = "/Users/wangjun/git/GitHub/poi-ppt-animation/src/test/resources/ppt/ppt2image/3.pptx";
+        String outputPath = "/Users/wangjun/git/GitHub/poi-ppt-animation/src/test/resources/ppt/ppt2image/3/";
         int width = 0, height = 0;
         PPTTool.getThumbnailFromPPT(pptPath, outputPath, width, height);
     }
