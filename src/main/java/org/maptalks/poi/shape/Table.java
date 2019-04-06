@@ -83,9 +83,7 @@ public class Table extends Shape {
             cell.setFillColor(symbol.getFillColor());
             cell.setInsets(symbol.getInsetPadding());
 
-
             cell.setWordWrap(symbol.isWordWrap());
-//            cell.setInsets(symbol.getInsetPadding());
             cell.setVerticalAlignment(symbol.getVerticalAlignment());
             cell.clearText();
 

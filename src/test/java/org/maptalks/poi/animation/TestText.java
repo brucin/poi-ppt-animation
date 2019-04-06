@@ -36,7 +36,7 @@ import java.io.*;
 public class TestText {
 
     @Test
-    public void test() throws Exception {
+    public void testVectorText() throws Exception {
         XMLSlideShow pptx = new XMLSlideShow();
         String imagePath = this.getClass().getResource("/images/text").getPath();
         XSLFSlide slide = pptx.createSlide();
@@ -67,7 +67,7 @@ public class TestText {
         //add label
         TextBoxSymbol symbol = new TextBoxSymbol();
         symbol.setWordWrap(true);
-        symbol.setLineColor(null);
+        symbol.setLineColor(Color.BLUE);//null
         symbol.setTextWeight("normal");
         symbol.setTextStyle("normal");
         symbol.setHorizontal("center");
@@ -78,10 +78,10 @@ public class TestText {
         Double[] padding = {2.0, 2.0, 2.0, 2.0};
         symbol.setPadding(padding);
         symbol.setLineSpacing(2.0);
-        symbol.setBoxType(ShapeType.ELLIPSE);
+        symbol.setBoxType(ShapeType.RECT);
         System.out.println(symbol.toString());
 
-        XSLFTextBox textBox = new TextBox("11", 14.0, 41.0, 20.0, 20.0, symbol)
+        XSLFTextBox textBox = new TextBox("Vector Text", 14.0, 41.0, 100.0, 30.0, symbol)
                 .convertTo(slide.createTextBox());
 
         String savePath = this.getClass().getResource("/ppt").getPath();
